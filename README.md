@@ -11,8 +11,6 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 - [Infrastructure](#infrastructure)
 - [Notes](#notes)
 
-![Component Diagram](https://github.com/spolnik/JAlgoArena/raw/master/design/JAlgoArena_Logo.png)
-
 ## Introduction
 
 - JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems, in one of two languages: Kotlin and Java. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points. Additionally Kotlin language is promoted, giving you 150% of usual points in Java with same time.
@@ -54,3 +52,5 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 ## Notes
 - [Running locally](https://github.com/spolnik/jalgoarena/wiki)
 - [Travis Builds](https://travis-ci.org/spolnik)
+
+![Component Diagram](https://github.com/spolnik/JAlgoArena/raw/master/design/JAlgoArena_Logo.png)
