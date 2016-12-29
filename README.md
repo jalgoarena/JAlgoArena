@@ -4,6 +4,8 @@ JAlgoArena is service dedicated for hosting programming contest. There is one sp
 
 JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
 
+Demo: https://jalgoarena-ui.herokuapp.com/
+
 - [Introduction](#introduction)
 - [Components](#components)
 - [E2E Tests](#e2e-tests)
