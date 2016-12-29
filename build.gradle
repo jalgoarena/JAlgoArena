@@ -7,6 +7,13 @@ repositories {
     mavenCentral()
 }
 
+test {
+    testLogging {
+        exceptionFormat = 'full'
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.7'
 
