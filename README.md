@@ -4,7 +4,7 @@ JAlgoArena is service dedicated for hosting programming contest. There is one sp
 
 JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
 
-Demo: https://jalgoarena-ui.herokuapp.com/
+Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
 
 - [Introduction](#introduction)
 - [Components](#components)
@@ -48,8 +48,8 @@ Demo: https://jalgoarena-ui.herokuapp.com/
 ## Infrastructure
 
 - Heroku (PaaS)
-- Xodus (embedded highly scalable database) - http://jetbrains.github.io/xodus/
-- TravisCI - https://travis-ci.org/spolnik/jalgoarena
+- Xodus (embedded highly scalable database) - [http://jetbrains.github.io/xodus/](http://jetbrains.github.io/xodus/)
+- TravisCI - [https://travis-ci.org/spolnik/JAlgoArena](https://travis-ci.org/spolnik/JAlgoArena)
 
 ## Notes
 - [Running locally](https://github.com/spolnik/jalgoarena/wiki)
