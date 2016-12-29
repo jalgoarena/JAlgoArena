@@ -17,7 +17,7 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 - JAlgoArena conduts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
 - Running Locally (TODO)
 
-![Component Diagram](https://raw.githubusercontent.com/spolnik/jalgoarena/master/design/component_diagram.png)
+![Component Diagram](https://github.com/spolnik/JAlgoArena/raw/master/design/component_diagram.png)
 
 ## Components
 
