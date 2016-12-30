@@ -54,7 +54,7 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 
 ## Developing new Judge Agent
 
-- If you would like to develop new judge agent supporting new programming language, or using different approach for judgement - please follow instructions in here: [how to develop new judge agent](https://github.com/spolnik/JAlgoArena/wiki/Implementing-new-Judge-Agent-for-JAlgoArena)
+- If you would like to develop new judge agent supporting new programming language, or using different approach for judgement - please follow instructions in here: [how to develop new judge agent](https://github.com/spolnik/JAlgoArena/wiki/Implementing-new-Judge-Agent)
 
 ## Notes
 - [Running locally](https://github.com/spolnik/jalgoarena/wiki)
