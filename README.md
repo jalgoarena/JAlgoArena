@@ -11,6 +11,7 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 - [E2E Tests](#e2e-tests)
 - [Continuous Delivery](#continuous-delivery)
 - [Infrastructure](#infrastructure)
+- [Developing new Judge Agent](#developing-new-judge-agent)
 - [Notes](#notes)
 
 ## Introduction
@@ -50,6 +51,10 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 - Heroku (PaaS)
 - Xodus (embedded highly scalable database) - [http://jetbrains.github.io/xodus/](http://jetbrains.github.io/xodus/)
 - TravisCI - [https://travis-ci.org/spolnik/JAlgoArena](https://travis-ci.org/spolnik/JAlgoArena)
+
+## Developing new Judge Agent
+
+- If you would like to develop new judge agent supporting new programming language, or using different approach for judgement - please follow instructions in here: [how to develop new judge agent](https://github.com/spolnik/JAlgoArena/wiki/Implementing-new-Judge-Agent-for-JAlgoArena)
 
 ## Notes
 - [Running locally](https://github.com/spolnik/jalgoarena/wiki)
