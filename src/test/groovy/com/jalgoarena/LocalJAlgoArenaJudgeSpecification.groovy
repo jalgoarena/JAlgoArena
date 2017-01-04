@@ -34,8 +34,8 @@ class LocalJAlgoArenaJudgeSpecification extends Specification {
 
         then: "We receive successful judgement result"
 
-        judgeResult.status_code == "ACCEPTED"
-        judgeResult.elapsed_time > 0
+        judgeResult.statusCode == "ACCEPTED"
+        judgeResult.elapsedTime > 0
 
         where:
         problemId                   | sourceFileName            | language
