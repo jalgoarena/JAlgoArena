@@ -46,6 +46,8 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 - coverage report is sent to Codecov
 - application is deployed into Heroku machine
 
+![Continuous Delivery](https://github.com/spolnik/JAlgoArena/raw/master/design/continuous_delivery.png)
+
 ## Infrastructure
 
 - Heroku (PaaS)
