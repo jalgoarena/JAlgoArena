@@ -12,10 +12,15 @@ class PingAllHerokuServicesInParallel {
         def services = [
             "jalgoarena-eureka",
             "jalgoarena",
+            "jalgoarena-judge-agent-1",
+            "jalgoarena-judge-agent-2",
+            "jalgoarena-judge-agent-3",
+            "jalgoarena-judge-agent-4",
             "jalgoarena-api",
             "jalgoarena-auth",
             "jalgoarena-problems",
             "jalgoarena-submissions",
+            "jalgoarena-ui"
         ]
 
         services.each {
