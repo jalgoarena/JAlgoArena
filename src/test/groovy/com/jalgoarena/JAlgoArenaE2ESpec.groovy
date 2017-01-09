@@ -89,13 +89,15 @@ class JAlgoArenaE2ESpec extends Specification {
         userSubmissions != null
         def fibSubmission = userSubmissions.find { it.problemId == "fib" }
 
-        fibSubmission.problemId == "fib"
-        fibSubmission.level == 1
-        fibSubmission.elapsedTime > 0.0
-        fibSubmission.sourceCode == "dummy"
-        fibSubmission.statusCode == "ACCEPTED"
-        fibSubmission.userId == user.id
-        fibSubmission.language == "kotlin"
+        with (fibSubmission) {
+            problemId == "fib"
+            level == 1
+            elapsedTime > 0.0
+            sourceCode == "dummy"
+            statusCode == "ACCEPTED"
+            userId == user.id
+            language == "kotlin"
+        }
     }
 
     def sentSubmission(judgeResult, user, token) {
