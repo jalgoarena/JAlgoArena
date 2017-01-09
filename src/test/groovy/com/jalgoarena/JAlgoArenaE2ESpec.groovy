@@ -43,10 +43,8 @@ class JAlgoArenaE2ESpec extends Specification {
 
     @Unroll
     "User submits successfully fib problem solution"() {
-        given: "User logging in and then submitting Fibonacci problem solution"
-
+        given: "User creates account if empty and log in"
         def user = null
-
         handleHttpException {
             def users = jalgoJudgeApiClient.get(
                     path: "/auth/users",
@@ -61,15 +59,15 @@ class JAlgoArenaE2ESpec extends Specification {
                 log.info("User already created: ${user}")
             }
         }
-
         def token = logInUser()
+
+        and: "User submitting solution for Fibonacci problem"
         def judgeResult = submitFibProblemInKotlin()
         def submission = sentSubmission(judgeResult, user, token)
 
         log.info("Submission saved: ${submission}")
 
         when: "We check user submissions"
-
         def userSubmissions
 
         handleHttpException {
@@ -83,7 +81,7 @@ class JAlgoArenaE2ESpec extends Specification {
         }
 
         then: "We can see saved submission on user profile"
-
+        userSubmissions != null
         def fibSubmission = userSubmissions.find { it.problemId == "fib" }
 
         fibSubmission.problemId == "fib"
