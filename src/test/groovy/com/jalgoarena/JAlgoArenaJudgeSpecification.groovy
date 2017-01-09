@@ -3,6 +3,7 @@ package com.jalgoarena
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import groovyx.net.http.ContentType
+import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
@@ -53,15 +54,18 @@ class JAlgoArenaJudgeSpecification extends Specification {
 
         when: "We judge solution"
 
-        def judgeResult = jalgoJudgeApiClient.post(
+        def judgeResult
+        handleHttpException {
+            judgeResult = jalgoJudgeApiClient.post(
                 path: "judge/api/problems/$problemId/submit",
                 body: sourceCode,
                 requestContentType: ContentType.TEXT,
                 contentType: ContentType.JSON
-        ).data
+            ).data
+        }
 
         then: "We receive successful judgement result"
-
+        judgeResult != null
         judgeResult.statusCode == "ACCEPTED"
         judgeResult.elapsedTime > 0
 
@@ -131,5 +135,14 @@ class JAlgoArenaJudgeSpecification extends Specification {
         "sum-binary-tree"           | "SumBinaryTree"           | "kotlin"
         "insert-stars"              | "InsertStars"             | "kotlin"
         "transpose-matrix"          | "TransposeMatrix"         | "kotlin"
+    }
+
+    def handleHttpException(block) {
+        try {
+            block()
+        } catch (HttpResponseException e) {
+            log.error("Status: ${e.response.status}, Message: ${e.response.data}")
+            throw e
+        }
     }
 }
