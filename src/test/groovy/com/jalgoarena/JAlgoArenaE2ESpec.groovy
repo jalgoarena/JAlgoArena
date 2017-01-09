@@ -61,15 +61,20 @@ class JAlgoArenaE2ESpec extends Specification {
         }
         def token = logInUser()
 
-        and: "User submitting solution for Fibonacci problem"
+        and: "User judges solution for Fibonacci problem"
         def judgeResult = submitFibProblemInKotlin()
-        def submission = sentSubmission(judgeResult, user, token)
 
+        and: "User submits solution"
+        def submission = sentSubmission(judgeResult, user, token)
         log.info("Submission saved: ${submission}")
+
+        expect:
+        token != null
+        submission != null
+        judgeResult != null
 
         when: "We check user submissions"
         def userSubmissions
-
         handleHttpException {
             userSubmissions = jalgoJudgeApiClient.get(
                     path: "/submissions/api/submissions/${user.id}",
