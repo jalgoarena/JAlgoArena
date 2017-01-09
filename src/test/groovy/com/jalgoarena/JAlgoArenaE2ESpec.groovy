@@ -7,7 +7,6 @@ import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class JAlgoArenaE2ESpec extends Specification {
 
@@ -41,63 +40,62 @@ class JAlgoArenaE2ESpec extends Specification {
         log.info("$url - $status")
     }
 
-    @Unroll
-    "User submits successfully fib problem solution"() {
+    def "User submits successfully fib problem solution"() {
         given: "User creates account if empty and log in"
-        def user = null
-        handleHttpException {
-            def users = jalgoJudgeApiClient.get(
-                    path: "/auth/users",
-                    contentType: ContentType.JSON
-            ).data
+            def user = null
+            handleHttpException {
+                def users = jalgoJudgeApiClient.get(
+                        path: "/auth/users",
+                        contentType: ContentType.JSON
+                ).data
 
-            user = users.find { it.username == "mikołaj" }
+                user = users.find { it.username == "mikołaj" }
 
-            if (user == null) {
-                user = createUser()
-            } else {
-                log.info("User already created: ${user}")
+                if (user == null) {
+                    user = createUser()
+                } else {
+                    log.info("User already created: ${user}")
+                }
             }
-        }
-        def token = logInUser()
+            def token = logInUser()
 
         and: "User judges solution for Fibonacci problem"
-        def judgeResult = submitFibProblemInKotlin()
+            def judgeResult = submitFibProblemInKotlin()
 
         and: "User submits solution"
-        def submission = sentSubmission(judgeResult, user, token)
-        log.info("Submission saved: ${submission}")
+            def submission = sentSubmission(judgeResult, user, token)
+            log.info("Submission saved: ${submission}")
 
         expect:
-        token != null
-        submission != null
-        judgeResult != null
+            token != null
+            submission != null
+            judgeResult != null
 
         when: "We check user submissions"
-        def userSubmissions
-        handleHttpException {
-            userSubmissions = jalgoJudgeApiClient.get(
-                    path: "/submissions/api/submissions/${user.id}",
-                    contentType: ContentType.JSON,
-                    headers: ["X-Authorization": "Bearer ${token}"]
-            ).data
+            def userSubmissions
+            handleHttpException {
+                userSubmissions = jalgoJudgeApiClient.get(
+                        path: "/submissions/api/submissions/${user.id}",
+                        contentType: ContentType.JSON,
+                        headers: ["X-Authorization": "Bearer ${token}"]
+                ).data
 
-            log.info("User Submissions: ${userSubmissions}")
-        }
+                log.info("User Submissions: ${userSubmissions}")
+            }
 
         then: "We can see saved submission on user profile"
-        userSubmissions != null
-        def fibSubmission = userSubmissions.find { it.problemId == "fib" }
+            userSubmissions != null
+            def fibSubmission = userSubmissions.find { it.problemId == "fib" }
 
-        with (fibSubmission) {
-            problemId == "fib"
-            level == 1
-            elapsedTime > 0.0
-            sourceCode == "dummy"
-            statusCode == "ACCEPTED"
-            userId == user.id
-            language == "kotlin"
-        }
+            with (fibSubmission) {
+                problemId == "fib"
+                level == 1
+                elapsedTime > 0.0
+                sourceCode == "dummy"
+                statusCode == "ACCEPTED"
+                userId == user.id
+                language == "kotlin"
+            }
     }
 
     def sentSubmission(judgeResult, user, token) {
