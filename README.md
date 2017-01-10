@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4cd549bb321f4cabb06a17ad1cb8e61c)](https://www.codacy.com/app/jacek-spolnik/JAlgoArena?utm_source=github.com&utm_medium=referral&utm_content=spolnik/JAlgoArena&utm_campaign=badger)
 # JAlgoArena [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena)
 
 JAlgoArena is service dedicated for hosting programming contest. There is one special thing about it - you can use it in SaaS mode as well as on-permises (self-hosted) mode - which is great alternative to portals like hackerrank and others - when you are limited to only own infrastruture or you just don't want to pay for external service or help in organizing coding contest for your developers.
