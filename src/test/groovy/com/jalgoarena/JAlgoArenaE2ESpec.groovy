@@ -45,8 +45,6 @@ class JAlgoArenaE2ESpec extends Specification {
                         contentType: ContentType.JSON,
                         headers: ["X-Authorization": "Bearer ${token}"]
                 ).data
-
-                log.info("User Submissions: ${userSubmissions}")
             }
 
         then: "We can see saved submission on user profile"
