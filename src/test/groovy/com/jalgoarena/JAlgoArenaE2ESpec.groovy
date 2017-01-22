@@ -16,6 +16,36 @@ class JAlgoArenaE2ESpec extends Specification {
 
     static jalgoJudgeApiClient = new RESTClient("https://jalgoarena-api.herokuapp.com/")
 
+    def setupSpec() {
+
+        def services = [
+                "jalgoarena-eureka",
+                "jalgoarena",
+                "jalgoarena-judge-agent-1",
+                "jalgoarena-judge-agent-2",
+                "jalgoarena-judge-agent-3",
+                "jalgoarena-judge-agent-4",
+                "jalgoarena-api",
+                "jalgoarena-auth",
+                "jalgoarena-problems",
+                "jalgoarena-submissions",
+        ]
+
+        services.each {
+            healthCheck("https://${it}.herokuapp.com/")
+        }
+    }
+
+    def healthCheck(String url) {
+
+        log.info("$url - checking...")
+        def status = new RESTClient(url)
+                .get(path: "health")
+                .data.status.toString()
+
+        log.info("$url - $status")
+    }
+
     @Unroll
     "User #username submits successfully #problemId problem solution in #language"(String problemId, String sourceFileName, String language, String username, Integer level) {
         given: "User creates account if empty and log in"
