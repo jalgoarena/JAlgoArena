@@ -4,6 +4,20 @@ JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. 
 
 JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
 
+**Important**
+As JAlgoArena DEMO is hosted on free heroku account - they are goes every 5 minute sleep. If you want to successfully check below demo - firstly make sure you can open all below links to wake up all services
+
+* [jalgoarena-eureka](https://jalgoarena-eureka.herokuapp.com) - REQUIRED
+* [jalgoarena-judge](https://jalgoarena.herokuapp.com) - REQUIRED
+* [jalgoarena-api](https://jalgoarena-api.herokuapp.com) - REQUIRED
+* [jalgoarena-auth](https://jalgoarena-auth.herokuapp.com) - REQUIRED
+* [jalgoarena-problems](https://jalgoarena-problems.herokuapp.com) - REQUIRED
+* [jalgoarena-submissions](https://jalgoarena-submissions.herokuapp.com) - REQUIRED
+* [jalgoarena-judge-agent-1](https://jalgoarena-judge-agent-1.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-2](https://jalgoarena-judge-agent-2.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-3](https://jalgoarena-judge-agent-3.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-4](https://jalgoarena-judge-agent-4.herokuapp.com) - OPTIONAL
+
 Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
 
 - [Introduction](#introduction)
