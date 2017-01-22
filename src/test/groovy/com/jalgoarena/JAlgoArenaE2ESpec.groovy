@@ -29,7 +29,6 @@ class JAlgoArenaE2ESpec extends Specification {
 
         and: "User submits solution for $problemId problem"
             def submission = sentSubmission(judgeResult, user, token, problemId, language, sourceCode, level)
-            log.info("Submission saved: ${submission}")
 
         expect:
             token != null
