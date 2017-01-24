@@ -1,6 +1,6 @@
 # JAlgoArena [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena)
 
-JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. heroku) as well as on-permises (self-hosted) mode - which is great alternative to portals like hackerrank and others - when you are limited to only own infrastruture or you just don't want to pay for external service or help in organizing coding contest for your developers.
+JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. Heroku) as well as on-premises (self-hosted) mode - which is great alternative to portals like HackerRank and others - when you are limited to only own infrastructure or you just don't want to pay for external service or help in organizing coding contest for your developers.
 
 JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
 
