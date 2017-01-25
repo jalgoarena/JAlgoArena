@@ -47,7 +47,7 @@ class JAlgoArenaE2ESpec extends Specification {
     }
 
     @Unroll
-    "User #username submits successfully #problemId problem solution in #language"(String problemId, String sourceFileName, String language, String username, Integer level) {
+    "User #username submits successfully #problemId problem solution in #language"(String problemId, String sourceFileName, String language, String username) {
         given: "User creates account if empty and log in"
             def user = createOrFindUser(username)
             def token = logInUser(username)
@@ -58,7 +58,7 @@ class JAlgoArenaE2ESpec extends Specification {
             def judgeResult = judgeProblem(sourceCode, problemId)
 
         and: "User submits solution for $problemId problem"
-            def submission = sentSubmission(judgeResult, user, token, problemId, language, sourceCode, level)
+            def submission = sentSubmission(judgeResult, user, token, problemId, language, sourceCode)
 
         expect:
             token != null
@@ -81,7 +81,6 @@ class JAlgoArenaE2ESpec extends Specification {
             def problemSubmission = userSubmissions.find { it.problemId == problemId }
 
             problemSubmission.problemId == problemId
-            problemSubmission.level == level
             problemSubmission.elapsedTime > 0.0
             problemSubmission.sourceCode == sourceCode
             problemSubmission.statusCode == "ACCEPTED"
@@ -90,71 +89,71 @@ class JAlgoArenaE2ESpec extends Specification {
 
 
         where:
-        problemId                   | sourceFileName            | language  | username  | level
-        "2-sum"                     | "TwoSum"                  | "java"    | "mikołaj" | 2
-        "fib"                       | "FibFast"                 | "java"    | "mikołaj" | 1
-        "stoi"                      | "MyStoi"                  | "java"    | "mikołaj" | 2
-        "word-ladder"               | "WordLadder"              | "java"    | "mikołaj" | 3
-        "is-string-unique"          | "IsStringUnique2"         | "java"    | "mikołaj" | 1
-        "check-perm"                | "CheckPerm"               | "java"    | "mikołaj" | 1
-        "palindrome-perm"           | "PalindromePerm"          | "java"    | "mikołaj" | 1
-        "one-away"                  | "OneAway"                 | "java"    | "mikołaj" | 2
-        "string-compress"           | "StringCompress"          | "java"    | "mikołaj" | 1
-        "rotate-matrix"             | "RotateMatrix"            | "java"    | "mikołaj" | 1
-        "zero-matrix"               | "ZeroMatrix"              | "java"    | "mikołaj" | 1
-        "remove-dups"               | "RemoveDups"              | "java"    | "mikołaj" | 1
-        "kth-to-last"               | "KThToLast"               | "java"    | "mikołaj" | 2
-        "string-rotation"           | "StringRotation"          | "java"    | "mikołaj" | 1
-        "sum-lists"                 | "SumLists"                | "java"    | "mikołaj" | 3
-        "sum-lists-2"               | "SumLists2"               | "java"    | "mikołaj" | 3
-        "palindrome-list"           | "PalindromeList"          | "java"    | "mikołaj" | 1
-        "binary-search"             | "BinarySearch"            | "java"    | "mikołaj" | 1
-        "delete-tail-node"          | "DeleteTailNode"          | "java"    | "mikołaj" | 1
-        "repeated-elements"         | "RepeatedElements"        | "java"    | "mikołaj" | 1
-        "first-non-repeated-char"   | "FirstNonRepeatedChar"    | "java"    | "mikołaj" | 1
-        "find-middle-node"          | "FindMiddleNode"          | "java"    | "mikołaj" | 1
-        "horizontal-flip"           | "HorizontalFlip"          | "java"    | "mikołaj" | 2
-        "vertical-flip"             | "VerticalFlip"            | "java"    | "mikołaj" | 2
-        "single-number"             | "SingleNumber"            | "java"    | "mikołaj" | 1
-        "preorder-traversal"        | "PreorderTraversal"       | "java"    | "mikołaj" | 1
-        "inorder-traversal"         | "InorderTraversal"        | "java"    | "mikołaj" | 1
-        "postorder-traversal"       | "PostorderTraversal"      | "java"    | "mikołaj" | 1
-        "height-binary-tree"        | "HeightOfBinaryTree"      | "java"    | "mikołaj" | 1
-        "sum-binary-tree"           | "SumBinaryTree"           | "java"    | "mikołaj" | 1
-        "insert-stars"              | "InsertStars"             | "java"    | "mikołaj" | 2
-        "transpose-matrix"          | "TransposeMatrix"         | "java"    | "mikołaj" | 1
-        "2-sum"                     | "TwoSum"                  | "kotlin"  | "julia"   | 2
-        "fib"                       | "FibFast"                 | "kotlin"  | "julia"   | 1
-        "stoi"                      | "MyStoi"                  | "kotlin"  | "julia"   | 2
-        "word-ladder"               | "WordLadder"              | "kotlin"  | "julia"   | 3
-        "is-string-unique"          | "IsStringUnique2"         | "kotlin"  | "julia"   | 1
-        "check-perm"                | "CheckPerm"               | "kotlin"  | "julia"   | 1
-        "palindrome-perm"           | "PalindromePerm"          | "kotlin"  | "julia"   | 1
-        "one-away"                  | "OneAway"                 | "kotlin"  | "julia"   | 2
-        "string-compress"           | "StringCompress"          | "kotlin"  | "julia"   | 1
-        "rotate-matrix"             | "RotateMatrix"            | "kotlin"  | "julia"   | 1
-        "zero-matrix"               | "ZeroMatrix"              | "kotlin"  | "julia"   | 1
-        "remove-dups"               | "RemoveDups"              | "kotlin"  | "julia"   | 1
-        "kth-to-last"               | "KThToLast"               | "kotlin"  | "julia"   | 2
-        "string-rotation"           | "StringRotation"          | "kotlin"  | "julia"   | 1
-        "sum-lists"                 | "SumLists"                | "kotlin"  | "julia"   | 3
-        "sum-lists-2"               | "SumLists2"               | "kotlin"  | "julia"   | 3
-        "palindrome-list"           | "PalindromeList"          | "kotlin"  | "julia"   | 1
-        "binary-search"             | "BinarySearch"            | "kotlin"  | "julia"   | 1
-        "delete-tail-node"          | "DeleteTailNode"          | "kotlin"  | "julia"   | 1
-        "repeated-elements"         | "RepeatedElements"        | "kotlin"  | "julia"   | 1
-        "first-non-repeated-char"   | "FirstNonRepeatedChar"    | "kotlin"  | "julia"   | 1
-        "find-middle-node"          | "FindMiddleNode"          | "kotlin"  | "julia"   | 1
-        "horizontal-flip"           | "HorizontalFlip"          | "kotlin"  | "julia"   | 2
-        "vertical-flip"             | "VerticalFlip"            | "kotlin"  | "julia"   | 2
-        "single-number"             | "SingleNumber"            | "kotlin"  | "julia"   | 1
-        "preorder-traversal"        | "PreorderTraversal"       | "kotlin"  | "julia"   | 1
-        "inorder-traversal"         | "InorderTraversal"        | "kotlin"  | "julia"   | 1
-        "postorder-traversal"       | "PostorderTraversal"      | "kotlin"  | "julia"   | 1
-        "height-binary-tree"        | "HeightOfBinaryTree"      | "kotlin"  | "julia"   | 1
-        "sum-binary-tree"           | "SumBinaryTree"           | "kotlin"  | "julia"   | 1
-        "insert-stars"              | "InsertStars"             | "kotlin"  | "julia"   | 2
-        "transpose-matrix"          | "TransposeMatrix"         | "kotlin"  | "julia"   | 1
+        problemId                   | sourceFileName            | language  | username
+        "2-sum"                     | "TwoSum"                  | "java"    | "mikołaj"
+        "fib"                       | "FibFast"                 | "java"    | "mikołaj"
+        "stoi"                      | "MyStoi"                  | "java"    | "mikołaj"
+        "word-ladder"               | "WordLadder"              | "java"    | "mikołaj"
+        "is-string-unique"          | "IsStringUnique2"         | "java"    | "mikołaj"
+        "check-perm"                | "CheckPerm"               | "java"    | "mikołaj"
+        "palindrome-perm"           | "PalindromePerm"          | "java"    | "mikołaj"
+        "one-away"                  | "OneAway"                 | "java"    | "mikołaj"
+        "string-compress"           | "StringCompress"          | "java"    | "mikołaj"
+        "rotate-matrix"             | "RotateMatrix"            | "java"    | "mikołaj"
+        "zero-matrix"               | "ZeroMatrix"              | "java"    | "mikołaj"
+        "remove-dups"               | "RemoveDups"              | "java"    | "mikołaj"
+        "kth-to-last"               | "KThToLast"               | "java"    | "mikołaj"
+        "string-rotation"           | "StringRotation"          | "java"    | "mikołaj"
+        "sum-lists"                 | "SumLists"                | "java"    | "mikołaj"
+        "sum-lists-2"               | "SumLists2"               | "java"    | "mikołaj"
+        "palindrome-list"           | "PalindromeList"          | "java"    | "mikołaj"
+        "binary-search"             | "BinarySearch"            | "java"    | "mikołaj"
+        "delete-tail-node"          | "DeleteTailNode"          | "java"    | "mikołaj"
+        "repeated-elements"         | "RepeatedElements"        | "java"    | "mikołaj"
+        "first-non-repeated-char"   | "FirstNonRepeatedChar"    | "java"    | "mikołaj"
+        "find-middle-node"          | "FindMiddleNode"          | "java"    | "mikołaj"
+        "horizontal-flip"           | "HorizontalFlip"          | "java"    | "mikołaj"
+        "vertical-flip"             | "VerticalFlip"            | "java"    | "mikołaj"
+        "single-number"             | "SingleNumber"            | "java"    | "mikołaj"
+        "preorder-traversal"        | "PreorderTraversal"       | "java"    | "mikołaj"
+        "inorder-traversal"         | "InorderTraversal"        | "java"    | "mikołaj"
+        "postorder-traversal"       | "PostorderTraversal"      | "java"    | "mikołaj"
+        "height-binary-tree"        | "HeightOfBinaryTree"      | "java"    | "mikołaj"
+        "sum-binary-tree"           | "SumBinaryTree"           | "java"    | "mikołaj"
+        "insert-stars"              | "InsertStars"             | "java"    | "mikołaj"
+        "transpose-matrix"          | "TransposeMatrix"         | "java"    | "mikołaj"
+        "2-sum"                     | "TwoSum"                  | "kotlin"  | "julia"
+        "fib"                       | "FibFast"                 | "kotlin"  | "julia"
+        "stoi"                      | "MyStoi"                  | "kotlin"  | "julia"
+        "word-ladder"               | "WordLadder"              | "kotlin"  | "julia"
+        "is-string-unique"          | "IsStringUnique2"         | "kotlin"  | "julia"
+        "check-perm"                | "CheckPerm"               | "kotlin"  | "julia"
+        "palindrome-perm"           | "PalindromePerm"          | "kotlin"  | "julia"
+        "one-away"                  | "OneAway"                 | "kotlin"  | "julia"
+        "string-compress"           | "StringCompress"          | "kotlin"  | "julia"
+        "rotate-matrix"             | "RotateMatrix"            | "kotlin"  | "julia"
+        "zero-matrix"               | "ZeroMatrix"              | "kotlin"  | "julia"
+        "remove-dups"               | "RemoveDups"              | "kotlin"  | "julia"
+        "kth-to-last"               | "KThToLast"               | "kotlin"  | "julia"
+        "string-rotation"           | "StringRotation"          | "kotlin"  | "julia"
+        "sum-lists"                 | "SumLists"                | "kotlin"  | "julia"
+        "sum-lists-2"               | "SumLists2"               | "kotlin"  | "julia"
+        "palindrome-list"           | "PalindromeList"          | "kotlin"  | "julia"
+        "binary-search"             | "BinarySearch"            | "kotlin"  | "julia"
+        "delete-tail-node"          | "DeleteTailNode"          | "kotlin"  | "julia"
+        "repeated-elements"         | "RepeatedElements"        | "kotlin"  | "julia"
+        "first-non-repeated-char"   | "FirstNonRepeatedChar"    | "kotlin"  | "julia"
+        "find-middle-node"          | "FindMiddleNode"          | "kotlin"  | "julia"
+        "horizontal-flip"           | "HorizontalFlip"          | "kotlin"  | "julia"
+        "vertical-flip"             | "VerticalFlip"            | "kotlin"  | "julia"
+        "single-number"             | "SingleNumber"            | "kotlin"  | "julia"
+        "preorder-traversal"        | "PreorderTraversal"       | "kotlin"  | "julia"
+        "inorder-traversal"         | "InorderTraversal"        | "kotlin"  | "julia"
+        "postorder-traversal"       | "PostorderTraversal"      | "kotlin"  | "julia"
+        "height-binary-tree"        | "HeightOfBinaryTree"      | "kotlin"  | "julia"
+        "sum-binary-tree"           | "SumBinaryTree"           | "kotlin"  | "julia"
+        "insert-stars"              | "InsertStars"             | "kotlin"  | "julia"
+        "transpose-matrix"          | "TransposeMatrix"         | "kotlin"  | "julia"
     }
 
     def createOrFindUser(String username) {
@@ -176,12 +175,11 @@ class JAlgoArenaE2ESpec extends Specification {
         }
     }
 
-    def sentSubmission(judgeResult, user, token, problemId, language, String sourceCode, level) {
+    def sentSubmission(judgeResult, user, token, problemId, language, String sourceCode) {
         log.info("Step 4 - Submit Solution for $problemId")
 
         def submissionRequestJson = """{
     "problemId": "$problemId",
-    "level": $level,
     "elapsedTime": ${judgeResult.elapsedTime},
     "sourceCode": "${StringEscapeUtils.escapeJava(sourceCode)}",
     "statusCode": "${judgeResult.statusCode}",
