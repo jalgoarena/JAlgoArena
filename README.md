@@ -1,11 +1,10 @@
 # JAlgoArena [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena)
 
-JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. heroku) as well as on-permises (self-hosted) mode - which is great alternative to portals like hackerrank and others - when you are limited to only own infrastruture or you just don't want to pay for external service or help in organizing coding contest for your developers.
+JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. Heroku) as well as on-premises (self-hosted) mode - which is great alternative to portals like HackerRank and others - when you are limited to only own infrastructure or you just don't want to pay for external service or help in organizing coding contest for your developers.
 
 JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
 
-Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
-
+- [Demo](#demo)
 - [Introduction](#introduction)
 - [Components](#components)
 - [E2E Tests](#e2e-tests)
@@ -14,6 +13,23 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 - [Running Locally] (#running-locally)
 - [Developing new Judge Agent](#developing-new-judge-agent)
 - [Notes](#notes)
+
+## Demo
+
+As JAlgoArena DEMO is hosted on free heroku account - they are goes every 5 minute sleep. If you want to successfully check below demo - firstly make sure you can open all below links to wake up all services
+
+* [jalgoarena-eureka](https://jalgoarena-eureka.herokuapp.com) - REQUIRED
+* [jalgoarena-judge](https://jalgoarena.herokuapp.com) - REQUIRED
+* [jalgoarena-api](https://jalgoarena-api.herokuapp.com) - REQUIRED
+* [jalgoarena-auth](https://jalgoarena-auth.herokuapp.com) - REQUIRED
+* [jalgoarena-problems](https://jalgoarena-problems.herokuapp.com) - REQUIRED
+* [jalgoarena-submissions](https://jalgoarena-submissions.herokuapp.com) - REQUIRED
+* [jalgoarena-judge-agent-1](https://jalgoarena-judge-agent-1.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-2](https://jalgoarena-judge-agent-2.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-3](https://jalgoarena-judge-agent-3.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-4](https://jalgoarena-judge-agent-4.herokuapp.com) - OPTIONAL
+
+Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
 
 ## Introduction
 
