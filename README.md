@@ -7,10 +7,11 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 - [Demo](#demo)
 - [Introduction](#introduction)
 - [Components](#components)
+- [Project Board](#project-board)
 - [E2E Tests](#e2e-tests)
 - [Continuous Delivery](#continuous-delivery)
 - [Infrastructure](#infrastructure)
-- [Running Locally] (#running-locally)
+- [Running Locally](#running-locally)
 - [Developing new Judge Agent](#developing-new-judge-agent)
 - [Notes](#notes)
 
@@ -47,6 +48,27 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 - [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
 - [JAlgoArena Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 - [JAlgoArena API Gateway](https://github.com/spolnik/JAlgoArena-API)
+
+# Project Board
+
+JALgoArena project kanban board showing planned features and their development progress
+
+![Project Board](https://github.com/spolnik/JAlgoArena/blob/master/design/JAlgoArena-Project.png)
+
+### Ideas
+_Ideas about project features - not yet decided if they will be done._
+
+### Backlog
+_Features which are deemed valid but low-priority yet._
+
+### TODO
+_Features with high-priority - will be done for the next releases._
+
+### In Progress
+_Features in progress._
+
+### Done
+_Features implemented and released._
 
 ## E2E Tests
 
