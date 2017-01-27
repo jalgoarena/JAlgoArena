@@ -51,7 +51,7 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 
 # Kanban Board
 
-JALgoArena project kanban board showing planned features and their development progress (you can find it under project tab).
+JAlgoArena project kanban board showing planned features and their development progress (you can find it under project tab).
 
 ![Kanban Board](https://github.com/spolnik/JAlgoArena/blob/master/design/JAlgoArena-Project.png)
 
