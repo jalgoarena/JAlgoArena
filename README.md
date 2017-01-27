@@ -55,20 +55,13 @@ JAlgoArena project kanban board showing planned features and their development p
 
 ![Kanban Board](https://github.com/spolnik/JAlgoArena/blob/master/design/JAlgoArena-Project.png)
 
-### Ideas
-_Ideas about project features - not yet decided if they will be done._
-
-### Backlog
-_Features which are deemed valid but low-priority yet._
-
-### TODO
-_Features with high-priority - will be done for the next releases._
-
-### In Progress
-_Features in progress._
-
-### Done
-_Features implemented and released._
+| State | Priority | Description |
+| ------------- | ------------- | ------------- |
+| Ideas | Unset | Not yet decided if they will be done |
+| Backlog | Low | To be done |
+| TODO | High | Will be done for the next releases |
+| In Progress | High | Features in progress |
+| Done | High | Features implemented and released |
 
 ## E2E Tests
 
