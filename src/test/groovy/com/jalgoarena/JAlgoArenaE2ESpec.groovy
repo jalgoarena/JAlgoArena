@@ -55,14 +55,10 @@ class JAlgoArenaE2ESpec extends Specification {
         and: "User judges solution for $problemId problem"
             def fileExtension = "java" == language ? "java" : "kt"
             def sourceCode = Resources.toString(Resources.getResource("$sourceFileName.$fileExtension"), Charsets.UTF_8)
-            def judgeResult = judgeProblem(sourceCode, problemId)
-
-        and: "User submits solution for $problemId problem"
-            def submission = sentSubmission(judgeResult, user, token, problemId, language, sourceCode)
+            def judgeResult = judgeProblem(sourceCode, user, token, problemId, language)
 
         expect:
             token != null
-            submission != null
             judgeResult != null
             judgeResult.statusCode == "ACCEPTED"
 
@@ -175,39 +171,23 @@ class JAlgoArenaE2ESpec extends Specification {
         }
     }
 
-    def sentSubmission(judgeResult, user, token, problemId, language, String sourceCode) {
-        log.info("Step 4 - Submit Solution for $problemId")
+    def judgeProblem(String sourceCode, user, token, problemId, language) {
+        log.info("Step 3 - Judge Solution for $problemId")
 
-        def submissionRequestJson = """{
-    "problemId": "$problemId",
-    "elapsedTime": ${judgeResult.elapsedTime},
+        def judgeRequestJson = """{
     "sourceCode": "${StringEscapeUtils.escapeJava(sourceCode)}",
-    "statusCode": "${judgeResult.statusCode}",
     "userId": "${user.id}",
     "language": "$language"
 }
 """
 
         handleHttpException {
-            jalgoJudgeApiClient.put(
-                    path: "/submissions/api/submissions",
-                    body: submissionRequestJson,
+            jalgoJudgeApiClient.post(
+                    path: "judge/api/problems/$problemId/submit",
+                    body: judgeRequestJson,
                     requestContentType: ContentType.JSON,
                     contentType: ContentType.JSON,
                     headers: ["X-Authorization": "Bearer ${token}"]
-            ).data
-        }
-    }
-
-    def judgeProblem(sourceCode, problemId) {
-        log.info("Step 3 - Judge Solution for $problemId")
-
-        handleHttpException {
-            jalgoJudgeApiClient.post(
-                    path: "judge/api/problems/$problemId/submit",
-                    body: sourceCode,
-                    requestContentType: ContentType.TEXT,
-                    contentType: ContentType.JSON
             ).data
         }
     }
