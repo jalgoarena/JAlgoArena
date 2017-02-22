@@ -39,7 +39,7 @@ class JAlgoArenaE2ESpec extends Specification {
     def healthCheck(String url) {
 
         log.info("$url - checking...")
-        def status = new RESTClient(url)
+        def status = new RESTClient(url, ContentType.JSON)
                 .get(path: "health")
                 .data.status.toString()
 
@@ -74,14 +74,16 @@ class JAlgoArenaE2ESpec extends Specification {
 
         then: "We can see saved submission on user profile"
             userSubmissions != null
-            def problemSubmission = userSubmissions.find { it.problemId == problemId }
+            def submissionWithRankingDetails = userSubmissions.find { it.problemId == problemId }
 
-            problemSubmission.problemId == problemId
-            problemSubmission.elapsedTime > 0.0
-            problemSubmission.sourceCode == sourceCode
-            problemSubmission.statusCode == "ACCEPTED"
-            problemSubmission.userId == user.id
-            problemSubmission.language == language
+            submissionWithRankingDetails.problemId == problemId
+            submissionWithRankingDetails.elapsedTime > 0.0
+            submissionWithRankingDetails.sourceCode == sourceCode
+            submissionWithRankingDetails.statusCode == "ACCEPTED"
+            submissionWithRankingDetails.language == language
+            submissionWithRankingDetails.level >= 1
+            submissionWithRankingDetails.level <= 3
+            submissionWithRankingDetails.score > 0.0
 
 
         where:
