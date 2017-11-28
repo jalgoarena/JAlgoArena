@@ -1,0 +1,86 @@
+version: '2'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  ui:
+    container_name: jalgoarea_ui
+    image: node:9.2.0
+    depends_on:
+      - app
+    volumes:
+      - ../JAlgoArea-UI:/opt/jalgoarea-ui
+    working_dir: /opt/jalgoarea-ui
+    ports:
+      - 3000:3000
+
+  app:
+    container_name: jalgoarea_app
+    image: frolvlad/alpine-oraclejdk8:slim
+    depends_on:
+      - eureka
+    volumes:
+      - ./:/opt/jalgoarea
+    working_dir: /opt/jalgoarea
+
+  eureka:
+    container_name: jalgoarea_eureka
+    image: frolvlad/alpine-oraclejdk8:slim
+    depends_on:
+      - api
+      - auth
+      - judge
+      - problems
+      - submissions
+    volumes:
+      - ../JAlgoArea-Eureka:/opt/jalgoarea-eureka
+    working_dir: /opt/jalgoarea-eureka
+    ports:
+      - 5000:5000
+
+  api:
+    container_name: jalgoarea_api
+    image: frolvlad/alpine-oraclejdk8:slim
+    volumes:
+      - ../JAlgoArea-Api:/opt/jalgoarea-api
+    working_dir: /opt/jalgoarea-api
+    ports:
+      - 5001:5001
+
+  auth:
+    container_name: jalgoarea_auth
+    image: frolvlad/alpine-oraclejdk8:slim
+    volumes:
+      - ../JAlgoArea-Auth:/opt/jalgoarea-auth
+    working_dir: /opt/jalgoarea-auth
+    ports:
+      - 9999:9999
+
+  judge:
+    container_name: jalgoarea_judge
+    image: frolvlad/alpine-oraclejdk8:slim
+    volumes:
+      - ../JAlgoArea-Judge:/opt/jalgoarea-judge
+    working_dir: /opt/jalgoarea-judge
+    ports:
+      - 8080:8080
+
+  problems:
+    container_name: jalgoarea_problems
+    image: frolvlad/alpine-oraclejdk8:slim
+    volumes:
+      - ../JAlgoArea-Problems:/opt/jalgoarea-problems
+    working_dir: /opt/jalgoarea-problems
+    ports:
+      - 5002:5002
+
+  submissions:
+    container_name: jalgoarea_submissions
+    image: frolvlad/alpine-oraclejdk8:slim
+    volumes:
+      - ../JAlgoArea-Submissions:/opt/jalgoarea-submissions
+    working_dir: /opt/jalgoarea-submissions
+    ports:
+      - 5003:5003
