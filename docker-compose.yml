@@ -5,82 +5,84 @@ networks:
     driver: bridge
 
 services:
-  ui:
-    container_name: jalgoarea_ui
-    image: node:9.2.0
-    depends_on:
-      - app
+  eureka:
+    container_name: jalgoarena_eureka
+    image: openjdk:8
     volumes:
-      - ../JAlgoArea-UI:/opt/jalgoarea-ui
-    working_dir: /opt/jalgoarea-ui
+      - ../JAlgoArena-Eureka:/opt/jalgoarena-eureka
+    working_dir: /opt/jalgoarena-eureka
     ports:
-      - 3000:3000
+      - 5000:5000
+    tty: true
 
-  app:
-    container_name: jalgoarea_app
-    image: frolvlad/alpine-oraclejdk8:slim
+  ui:
+    container_name: jalgoarena_ui
+    image: openjdk:8
     depends_on:
       - eureka
     volumes:
-      - ./:/opt/jalgoarea
-    working_dir: /opt/jalgoarea
-
-  eureka:
-    container_name: jalgoarea_eureka
-    image: frolvlad/alpine-oraclejdk8:slim
-    depends_on:
-      - api
-      - auth
-      - judge
-      - problems
-      - submissions
-    volumes:
-      - ../JAlgoArea-Eureka:/opt/jalgoarea-eureka
-    working_dir: /opt/jalgoarea-eureka
+      - ../JAlgoArena-UI:/opt/jalgoarena-ui
+    working_dir: /opt/jalgoarena-ui
     ports:
-      - 5000:5000
+      - 3000:3000
+    tty: true
 
   api:
-    container_name: jalgoarea_api
-    image: frolvlad/alpine-oraclejdk8:slim
+    container_name: jalgoarena_api
+    image: openjdk:8
+    depends_on:
+      - eureka
     volumes:
-      - ../JAlgoArea-Api:/opt/jalgoarea-api
-    working_dir: /opt/jalgoarea-api
+      - ../JAlgoArena-Api:/opt/jalgoarena-api
+    working_dir: /opt/jalgoarena-api
     ports:
       - 5001:5001
+    tty: true
 
   auth:
-    container_name: jalgoarea_auth
-    image: frolvlad/alpine-oraclejdk8:slim
+    container_name: jalgoarena_auth
+    image: openjdk:8
+    depends_on:
+      - eureka
     volumes:
-      - ../JAlgoArea-Auth:/opt/jalgoarea-auth
-    working_dir: /opt/jalgoarea-auth
+      - ../JAlgoArena-Auth:/opt/jalgoarena-auth
+    working_dir: /opt/jalgoarena-auth
     ports:
       - 9999:9999
+    tty: true
 
   judge:
-    container_name: jalgoarea_judge
-    image: frolvlad/alpine-oraclejdk8:slim
+    container_name: jalgoarena_judge
+    image: openjdk:8
+    depends_on:
+      - eureka
     volumes:
-      - ../JAlgoArea-Judge:/opt/jalgoarea-judge
-    working_dir: /opt/jalgoarea-judge
+      - ../JAlgoArena-Judge:/opt/jalgoarena-judge
+    working_dir: /opt/jalgoarena-judge
     ports:
       - 8080:8080
+    tty: true
 
   problems:
-    container_name: jalgoarea_problems
-    image: frolvlad/alpine-oraclejdk8:slim
+    container_name: jalgoarena_problems
+    image: openjdk:8
+    depends_on:
+      - eureka
     volumes:
-      - ../JAlgoArea-Problems:/opt/jalgoarea-problems
-    working_dir: /opt/jalgoarea-problems
+      - ../JAlgoArena-Problems:/opt/jalgoarena-problems
+    working_dir: /opt/jalgoarena-problems
     ports:
       - 5002:5002
+    tty: true
 
   submissions:
-    container_name: jalgoarea_submissions
-    image: frolvlad/alpine-oraclejdk8:slim
+    container_name: jalgoarena_submissions
+    image: openjdk:8
+    depends_on:
+      - eureka
     volumes:
-      - ../JAlgoArea-Submissions:/opt/jalgoarea-submissions
-    working_dir: /opt/jalgoarea-submissions
+      - ../JAlgoArena-Submissions:/opt/jalgoarena-submissions
+    working_dir: /opt/jalgoarena-submissions
     ports:
       - 5003:5003
+    tty: true
