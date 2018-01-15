@@ -1,0 +1,88 @@
+version: '2'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  eureka:
+    container_name: jalgoarena_eureka
+    image: openjdk:8
+    volumes:
+      - ../JAlgoArena-Eureka:/opt/jalgoarena-eureka
+    working_dir: /opt/jalgoarena-eureka
+    ports:
+      - 5000:5000
+    tty: true
+
+  ui:
+    container_name: jalgoarena_ui
+    image: openjdk:8
+    depends_on:
+      - eureka
+    volumes:
+      - ../JAlgoArena-UI:/opt/jalgoarena-ui
+    working_dir: /opt/jalgoarena-ui
+    ports:
+      - 3000:3000
+    tty: true
+
+  api:
+    container_name: jalgoarena_api
+    image: openjdk:8
+    depends_on:
+      - eureka
+    volumes:
+      - ../JAlgoArena-Api:/opt/jalgoarena-api
+    working_dir: /opt/jalgoarena-api
+    ports:
+      - 5001:5001
+    tty: true
+
+  auth:
+    container_name: jalgoarena_auth
+    image: openjdk:8
+    depends_on:
+      - eureka
+    volumes:
+      - ../JAlgoArena-Auth:/opt/jalgoarena-auth
+    working_dir: /opt/jalgoarena-auth
+    ports:
+      - 9999:9999
+    tty: true
+
+  judge:
+    container_name: jalgoarena_judge
+    image: openjdk:8
+    depends_on:
+      - eureka
+    volumes:
+      - ../JAlgoArena-Judge:/opt/jalgoarena-judge
+    working_dir: /opt/jalgoarena-judge
+    ports:
+      - 8080:8080
+    tty: true
+
+  problems:
+    container_name: jalgoarena_problems
+    image: openjdk:8
+    depends_on:
+      - eureka
+    volumes:
+      - ../JAlgoArena-Problems:/opt/jalgoarena-problems
+    working_dir: /opt/jalgoarena-problems
+    ports:
+      - 5002:5002
+    tty: true
+
+  submissions:
+    container_name: jalgoarena_submissions
+    image: openjdk:8
+    depends_on:
+      - eureka
+    volumes:
+      - ../JAlgoArena-Submissions:/opt/jalgoarena-submissions
+    working_dir: /opt/jalgoarena-submissions
+    ports:
+      - 5003:5003
+    tty: true
