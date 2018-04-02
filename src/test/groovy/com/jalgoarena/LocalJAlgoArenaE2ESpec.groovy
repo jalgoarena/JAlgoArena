@@ -6,7 +6,7 @@ import groovy.json.StringEscapeUtils
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
-import org.junit.Ignore
+import spock.lang.Ignore
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
 import spock.lang.Unroll
