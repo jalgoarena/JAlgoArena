@@ -48,6 +48,7 @@ Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com
 - [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
 - [JAlgoArena Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 - [JAlgoArena API Gateway](https://github.com/spolnik/JAlgoArena-API)
+- [JAlgoArena Queue](https://github.com/spolnik/JAlgoArena-Queue)
 
 # Kanban Board
 
@@ -94,6 +95,7 @@ To see detailed instructions on how to run particular components - go to below p
 * [Problems Service](https://github.com/spolnik/JAlgoArena-Problems)
 * [Judge Agent](https://github.com/spolnik/JAlgoArena-Judge)
 * [Submissions (and Ranking) Service](https://github.com/spolnik/JAlgoArena-Submissions)
+* [Queue](https://github.com/spolnik/JAlgoArena-Queue)
 * [UI Server](https://github.com/spolnik/JAlgoArena-UI)
 
 ## Developing new Judge Agent
