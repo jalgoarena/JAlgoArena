@@ -11,41 +11,11 @@ import org.slf4j.LoggerFactory
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class JAlgoArenaE2ESpec extends Specification {
+class LocalJAlgoArenaE2ESpec extends Specification {
 
-    static log = LoggerFactory.getLogger(JAlgoArenaE2ESpec.class)
+    static log = LoggerFactory.getLogger(LocalJAlgoArenaE2ESpec.class)
 
-    static jalgoJudgeApiClient = new RESTClient("https://jalgoarena-api.herokuapp.com/")
-
-    def setupSpec() {
-
-        def services = [
-                "jalgoarena-eureka",
-                "jalgoarena",
-                "jalgoarena-judge-agent-1",
-                "jalgoarena-judge-agent-2",
-                "jalgoarena-judge-agent-3",
-                "jalgoarena-judge-agent-4",
-                "jalgoarena-api",
-                "jalgoarena-auth",
-                "jalgoarena-problems",
-                "jalgoarena-submissions",
-        ]
-
-        services.each {
-            healthCheck("https://${it}.herokuapp.com/")
-        }
-    }
-
-    def healthCheck(String url) {
-
-        log.info("$url - checking...")
-        def status = new RESTClient(url, ContentType.JSON)
-                .get(path: "health")
-                .data.status.toString()
-
-        log.info("$url - $status")
-    }
+    static jalgoApiClient = new RESTClient("http://localhost:5001/")
 
     @Unroll
     @Ignore
@@ -62,31 +32,40 @@ class JAlgoArenaE2ESpec extends Specification {
         expect:
             token != null
             judgeResult != null
-            judgeResult.statusCode == "ACCEPTED"
+            judgeResult.submissionId != null
+            judgeResult.problemId == problemId
 
         when: "We check user submissions"
-            def userSubmissions
-            handleHttpException {
-                userSubmissions = jalgoJudgeApiClient.get(
-                        path: "/submissions/api/submissions/${user.id}",
-                        contentType: ContentType.JSON,
-                        headers: ["X-Authorization": "Bearer ${token}"]
-                ).data
+            log.info("Step 4 - Check Submission for $problemId")
+            sleep(1000)
+
+            def submissionResult
+            for (iteration in 1..20) {
+                handleHttpException {
+                    submissionResult = jalgoApiClient.get(
+                            path: "/submissions/api/submissions/find/${user.id}/${judgeResult.submissionId}",
+                            contentType: ContentType.JSON,
+                            headers: ["X-Authorization": "Bearer ${token}"]
+                    ).data
+                }
+
+                if (submissionResult != null && submissionResult.statusCode != "NOT_FOUND") {
+                    break
+                }
+                log.info("No response, retrying [iteration=$iteration]")
+                sleep(2000)
             }
 
+
         then: "We can see saved submission on user profile"
-            userSubmissions != null
-            def submissionWithRankingDetails = userSubmissions.find { it.problemId == problemId }
-
-            submissionWithRankingDetails.problemId == problemId
-            submissionWithRankingDetails.elapsedTime > 0.0
-            submissionWithRankingDetails.sourceCode == sourceCode
-            submissionWithRankingDetails.statusCode == "ACCEPTED"
-            submissionWithRankingDetails.language == language
-            submissionWithRankingDetails.level >= 1
-            submissionWithRankingDetails.level <= 3
-            submissionWithRankingDetails.score > 0.0
-
+            submissionResult != null
+            submissionResult.problemId == problemId
+            submissionResult.elapsedTime > 0.0
+            submissionResult.sourceCode == sourceCode
+            submissionResult.statusCode == "ACCEPTED"
+            submissionResult.language == language
+            submissionResult.submissionId == judgeResult.submissionId
+            submissionResult.errorMessage == null || submissionResult.errorMessage == ""
 
         where:
         problemId                   | sourceFileName            | language  | username
@@ -158,7 +137,7 @@ class JAlgoArenaE2ESpec extends Specification {
 
     def createOrFindUser(String username) {
         handleHttpException {
-            def users = jalgoJudgeApiClient.get(
+            def users = jalgoApiClient.get(
                     path: "/auth/users",
                     contentType: ContentType.JSON
             ).data
@@ -186,8 +165,8 @@ class JAlgoArenaE2ESpec extends Specification {
 """
 
         handleHttpException {
-            jalgoJudgeApiClient.post(
-                    path: "judge/api/problems/$problemId/submit",
+            jalgoApiClient.post(
+                    path: "queue/api/problems/$problemId/publish",
                     body: judgeRequestJson,
                     requestContentType: ContentType.JSON,
                     contentType: ContentType.JSON,
@@ -206,7 +185,7 @@ class JAlgoArenaE2ESpec extends Specification {
 """
 
         handleHttpException {
-            jalgoJudgeApiClient.post(
+            jalgoApiClient.post(
                     path: "auth/login",
                     body: loginRequestJson,
                     requestContentType: ContentType.JSON,
@@ -228,7 +207,7 @@ class JAlgoArenaE2ESpec extends Specification {
 
         log.info("Step 1 - Creating User")
 
-        jalgoJudgeApiClient.post(
+        jalgoApiClient.post(
                 path: "auth/signup",
                 body: signupRequestJson,
                 requestContentType: ContentType.JSON,
