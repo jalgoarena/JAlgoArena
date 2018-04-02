@@ -87,14 +87,14 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="814.078304784761" width="734.1220420837403" x="562.084553456478" y="-16.522531509399414"/>
+              <y:Geometry height="814.078304784761" width="796.6083730189923" x="562.084553456478" y="-16.522531509399414"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.666015625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="734.1220420837403" x="0.0" y="0.0">JAlgoArena Microservices</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.666015625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="796.6083730189923" x="0.0" y="0.0">JAlgoArena Microservices</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="4" bottomF="3.9884892086331547" left="21" leftF="21.165473246402826" right="62" rightF="62.11589157324056" top="80" topF="79.92657566070557"/>
+              <y:BorderInsets bottom="4" bottomF="3.9884892086331547" left="21" leftF="21.165473246402826" right="125" rightF="124.60222250849256" top="80" topF="79.92657566070557"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="60.0" y="60.0"/>
@@ -385,22 +385,6 @@ Agent<y:LabelModel>
         <node id="n2::n16">
           <data key="d6">
             <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="30.0" width="86.0" x="947.5006942749023" y="125.1401195526123"/>
-              <y:Fill color="#FF0000" transparent="false"/>
-              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="80.845703125" x="2.5771484375" y="5.93359375">Eureka Client<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n2::n17">
-          <data key="d6">
-            <y:GenericNode configuration="ShinyPlateNode">
               <y:Geometry height="30.0" width="86.0" x="972.7510414123535" y="150.21017932891846"/>
               <y:Fill color="#FF0000" transparent="false"/>
               <y:BorderStyle hasColor="false" type="line" width="1.0"/>
@@ -414,7 +398,7 @@ Agent<y:LabelModel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n18">
+        <node id="n2::n17">
           <data key="d5"/>
           <data key="d6">
             <y:SVGNode>
@@ -435,7 +419,7 @@ Agent<y:LabelModel>
             </y:SVGNode>
           </data>
         </node>
-        <node id="n2::n19">
+        <node id="n2::n18">
           <data key="d6">
             <y:GenericNode configuration="BevelNode2">
               <y:Geometry height="66.0" width="154.24991989135742" x="823.0001068115234" y="392.98988888280854"/>
@@ -451,10 +435,26 @@ Agent<y:LabelModel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n20">
+        <node id="n2::n19">
           <data key="d6">
             <y:GenericNode configuration="ShinyPlateNode">
               <y:Geometry height="30.0" width="86.0" x="923.2517356872559" y="385.740234375"/>
+              <y:Fill color="#FF0000" transparent="false"/>
+              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="80.845703125" x="2.5771484375" y="5.93359375">Eureka Client<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n2::n20">
+          <data key="d6">
+            <y:GenericNode configuration="ShinyPlateNode">
+              <y:Geometry height="30.0" width="86.0" x="947.5006942749023" y="125.1401195526123"/>
               <y:Fill color="#FF0000" transparent="false"/>
               <y:BorderStyle hasColor="false" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="80.845703125" x="2.5771484375" y="5.93359375">Eureka Client<y:LabelModel>
@@ -657,7 +657,7 @@ Agent<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e8" source="n2::n0" target="n2::n19">
+    <edge id="n2::e8" source="n2::n0" target="n2::n18">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -668,7 +668,7 @@ Agent<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e9" source="n2::n19" target="n2::n18">
+    <edge id="n2::e9" source="n2::n18" target="n2::n17">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -687,7 +687,7 @@ Agent<y:LabelModel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e10" source="n2::n18" target="n2::n1">
+    <edge id="n2::e10" source="n2::n17" target="n2::n1">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -711,21 +711,21 @@ Submission Result
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e11" source="n2::n18" target="n2::n7">
+    <edge id="n2::e11" source="n2::n17" target="n2::n7">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="3.9949733496789577" ty="18.561161952396105">
-            <y:Point x="1245.280286394714" y="425.98988888280854"/>
-            <y:Point x="1245.280286394714" y="221.05611510791368"/>
+            <y:Point x="1301.1191353155773" y="425.98988888280854"/>
+            <y:Point x="1301.1191353155773" y="221.05611510791368"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="133.17578125" x="-104.16112312504401" y="-184.00018982372694">Submission (message)<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="133.17578125" x="-51.02492490568147" y="-184.00018982372694">Submission (message)<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
-              <y:SmartEdgeLabelModelParameter angle="0.0" distance="30.0" distanceToCenter="true" position="left" ratio="0.34717943904155074" segment="-1"/>
+              <y:SmartEdgeLabelModelParameter angle="0.0" distance="30.0" distanceToCenter="true" position="left" ratio="0.28626394620302326" segment="-1"/>
             </y:ModelParameter>
             <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
@@ -733,21 +733,21 @@ Submission Result
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e12" source="n2::n7" target="n2::n18">
+    <edge id="n2::e12" source="n2::n7" target="n2::n17">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-0.0903200565262523" ty="25.06910392294691">
-            <y:Point x="1263.8932360350016" y="202.49495315551758"/>
-            <y:Point x="1263.8932360350016" y="451.05899280575545"/>
+            <y:Point x="1327.7090633731311" y="202.49495315551758"/>
+            <y:Point x="1327.7090633731311" y="451.05899280575545"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="172.767578125" x="54.04243232492718" y="-39.066402435302734">Submission Result (message)<y:LabelModel>
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="172.767578125" x="109.5508569886897" y="-39.06640243530276">Submission Result (message)<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
-              <y:SmartEdgeLabelModelParameter angle="0.0" distance="30.0" distanceToCenter="true" position="left" ratio="0.3374581862332629" segment="0"/>
+              <y:SmartEdgeLabelModelParameter angle="0.0" distance="30.0" distanceToCenter="true" position="left" ratio="0.5" segment="0"/>
             </y:ModelParameter>
             <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
