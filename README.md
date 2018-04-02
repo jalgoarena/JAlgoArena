@@ -15,23 +15,6 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 - [Developing new Judge Agent](#developing-new-judge-agent)
 - [Notes](#notes)
 
-## Demo
-
-As JAlgoArena DEMO is hosted on free heroku account - they are goes every 5 minute sleep. If you want to successfully check below demo - firstly make sure you can open all below links to wake up all services
-
-* [jalgoarena-eureka](https://jalgoarena-eureka.herokuapp.com) - REQUIRED
-* [jalgoarena-judge](https://jalgoarena.herokuapp.com) - REQUIRED
-* [jalgoarena-api](https://jalgoarena-api.herokuapp.com) - REQUIRED
-* [jalgoarena-auth](https://jalgoarena-auth.herokuapp.com) - REQUIRED
-* [jalgoarena-problems](https://jalgoarena-problems.herokuapp.com) - REQUIRED
-* [jalgoarena-submissions](https://jalgoarena-submissions.herokuapp.com) - REQUIRED
-* [jalgoarena-judge-agent-1](https://jalgoarena-judge-agent-1.herokuapp.com) - OPTIONAL
-* [jalgoarena-judge-agent-2](https://jalgoarena-judge-agent-2.herokuapp.com) - OPTIONAL
-* [jalgoarena-judge-agent-3](https://jalgoarena-judge-agent-3.herokuapp.com) - OPTIONAL
-* [jalgoarena-judge-agent-4](https://jalgoarena-judge-agent-4.herokuapp.com) - OPTIONAL
-
-Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
-
 ## Introduction
 
 - JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems, in one of two languages: Kotlin and Java. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points. Additionally Kotlin language is promoted, giving you 150% of usual points in Java with same time.
@@ -82,9 +65,13 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 
 ## Infrastructure
 
-- Heroku (PaaS)
-- Xodus (embedded highly scalable database) - [http://jetbrains.github.io/xodus/](http://jetbrains.github.io/xodus/)
+- Xodus (embedded highly scalable database) - [Xodus home page](http://jetbrains.github.io/xodus/)
+- [Xodus Entities Browser](https://github.com/JetBrains/xodus-entity-browser)
+- [Apache Kafka](https://kafka.apache.org)
+- [Netflix Eureka](https://github.com/Netflix/eureka/wiki/Eureka-at-a-glance)
+- [Netflix Zuul 1.0](https://github.com/Netflix/zuul/wiki/How-it-Works)
 - TravisCI - [https://travis-ci.org/spolnik/JAlgoArena](https://travis-ci.org/spolnik/JAlgoArena)
+- Heroku (PaaS) or any other hosting infra
 
 ## Running locally
 
@@ -101,6 +88,23 @@ To see detailed instructions on how to run particular components - go to below p
 ## Developing new Judge Agent
 
 - If you would like to develop new judge agent supporting new programming language, or using different approach for judgement - please follow instructions in here: [how to develop new judge agent](https://github.com/spolnik/JAlgoArena/wiki/Implementing-new-Judge-Agent)
+
+## Demo
+
+As JAlgoArena DEMO is hosted on free heroku account - they are goes every 5 minute sleep. If you want to successfully check below demo - firstly make sure you can open all below links to wake up all services
+
+* [jalgoarena-eureka](https://jalgoarena-eureka.herokuapp.com) - REQUIRED
+* [jalgoarena-judge](https://jalgoarena.herokuapp.com) - REQUIRED
+* [jalgoarena-api](https://jalgoarena-api.herokuapp.com) - REQUIRED
+* [jalgoarena-auth](https://jalgoarena-auth.herokuapp.com) - REQUIRED
+* [jalgoarena-problems](https://jalgoarena-problems.herokuapp.com) - REQUIRED
+* [jalgoarena-submissions](https://jalgoarena-submissions.herokuapp.com) - REQUIRED
+* [jalgoarena-judge-agent-1](https://jalgoarena-judge-agent-1.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-2](https://jalgoarena-judge-agent-2.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-3](https://jalgoarena-judge-agent-3.herokuapp.com) - OPTIONAL
+* [jalgoarena-judge-agent-4](https://jalgoarena-judge-agent-4.herokuapp.com) - OPTIONAL
+
+Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
 
 ## Notes
 - [Travis Builds](https://travis-ci.org/spolnik)
