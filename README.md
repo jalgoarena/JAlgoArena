@@ -1,4 +1,4 @@
-# JAlgoArena [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena) [![JProfiler](https://github.com/spolnik/JAlgoArena/raw/master/design/jprofiler_small.png)](http://www.ej-technologies.com/products/jprofiler/overview.html)
+# JAlgoArena 2 [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena) [![JProfiler](https://github.com/spolnik/JAlgoArena/raw/master/design/jprofiler_small.png)](http://www.ej-technologies.com/products/jprofiler/overview.html)
 
 JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. Heroku) as well as on-premises (self-hosted) mode - which is great alternative to portals like HackerRank and others - when you are limited to only own infrastructure or you just don't want to pay for external service or help in organizing coding contest for your developers.
 
@@ -25,13 +25,15 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 ## Components
 
 - [JAlgoArena UI](https://github.com/spolnik/JAlgoArena-UI)
-- [JAlgoArena Judge](https://github.com/spolnik/JAlgoArena-Judge)
-- [JAlgoArena Problems](https://github.com/spolnik/JAlgoArena-Problems)
-- [JAlgoArena Submissions (and Ranking)](https://github.com/spolnik/JAlgoArena-Submissions)
-- [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
 - [JAlgoArena Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 - [JAlgoArena API Gateway](https://github.com/spolnik/JAlgoArena-API)
+- [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
+- [JAlgoArena Problems](https://github.com/spolnik/JAlgoArena-Problems)
+- [JAlgoArena Submissions](https://github.com/spolnik/JAlgoArena-Submissions)
+- [JAlgoArena Ranking](https://github.com/spolnik/JAlgoArena-Ranking)
 - [JAlgoArena Queue](https://github.com/spolnik/JAlgoArena-Queue)
+- [JAlgoArena Judge](https://github.com/spolnik/JAlgoArena-Judge)
+- [JAlgoArena Events](https://github.com/spolnik/JAlgoArena-Events)
 
 # Kanban Board
 
@@ -76,13 +78,16 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 ## Running locally
 
 To see detailed instructions on how to run particular components - go to below pages and look for running locally section. Below order is important if you want UI to be fully functional just after starting. Although - you can start it in any order - having some parts of functionallity not working till all parts will be started.
+* Kafka & Zookeeper - **TBD**
 * [Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 * [API Gateway](https://github.com/spolnik/JAlgoArena-API)
 * [Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
 * [Problems Service](https://github.com/spolnik/JAlgoArena-Problems)
+* [Queue Service](https://github.com/spolnik/JAlgoArena-Queue)
+* [Events Service](https://github.com/spolnik/JAlgoArena-Events)
 * [Judge Agent](https://github.com/spolnik/JAlgoArena-Judge)
-* [Submissions (and Ranking) Service](https://github.com/spolnik/JAlgoArena-Submissions)
-* [Queue](https://github.com/spolnik/JAlgoArena-Queue)
+* [Submissions Service](https://github.com/spolnik/JAlgoArena-Submissions)
+* [Ranking Service](https://github.com/spolnik/JAlgoArena-Ranking)
 * [UI Server](https://github.com/spolnik/JAlgoArena-UI)
 
 ## Developing new Judge Agent
@@ -90,6 +95,8 @@ To see detailed instructions on how to run particular components - go to below p
 - If you would like to develop new judge agent supporting new programming language, or using different approach for judgement - please follow instructions in here: [how to develop new judge agent](https://github.com/spolnik/JAlgoArena/wiki/Implementing-new-Judge-Agent)
 
 ## Demo
+
+**deprecated**
 
 As JAlgoArena DEMO is hosted on free heroku account - they are goes every 5 minute sleep. If you want to successfully check below demo - firstly make sure you can open all below links to wake up all services
 
