@@ -1,0 +1,106 @@
+version: '3'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  eureka:
+    container_name: jalgoarena-eureka
+    build: ../JAlgoArena-Eureka
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5000:5000
+    tty: true
+
+  api:
+    container_name: jalgoarena-api
+    build: ../JAlgoArena-Api
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5001:5001
+    tty: true
+
+  problems:
+    container_name: jalgoarena-problems
+    build: ../JAlgoArena-Problems
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5002:5002
+    tty: true
+
+  auth:
+    container_name: jalgoarena-auth
+    build: ../JAlgoArena-Auth
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5003:5003
+    tty: true
+
+  submissions:
+    container_name: jalgoarena-submissions
+    build: ../JAlgoArena-Submissions
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5004:5004
+    tty: true
+
+  events:
+    container_name: jalgoarena-events
+    build: ../JAlgoArena-Events
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5005:5005
+    tty: true
+
+  ranking:
+    container_name: jalgoarena-ranking
+    build: ../JAlgoArena-Ranking
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5006:5006
+    tty: true
+
+  queue:
+    container_name: jalgoarena-queue
+    build: ../JAlgoArena-Queue
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5007:5007
+    tty: true
+
+  judge:
+    container_name: jalgoarena-judge
+    build: ../JAlgoArena-Judge
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5008:5008
+    tty: true
+
+  ui:
+    container_name: jalgoarena-ui
+    build: ../JAlgoArena-UI
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 3000:3000
+    tty: true
