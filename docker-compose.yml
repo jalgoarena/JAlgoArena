@@ -1,106 +1,160 @@
 version: '3'
 
-networks:
-  default:
-    driver: bridge
-
 services:
-  eureka:
-    container_name: jalgoarena-eureka
-    build: ../JAlgoArena-Eureka
-    deploy:
-      restart_policy:
-        condition: on-failure
+  zoo1:
+    image: zookeeper:3.4.11
+    hostname: zoo1
     ports:
-      - 5000:5000
-    tty: true
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: "server.1=zoo1:2888:3888"
+    volumes:
+      - ~/jalgoarena/zookeeper/zoo1/data:/data
+      - ~/jalgoarena/zookeeper/zoo1/datalog:/datalog
+    network_mode: host
+
+  kafka1:
+    image: confluentinc/cp-kafka:4.0.1
+    hostname: kafka1
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka1:9092"
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    volumes:
+      - ~/jalgoarena/kafka/kafka1/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+    network_mode: host
+
+  kafka2:
+    image: confluentinc/cp-kafka:4.0.1
+    hostname: kafka2
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka2:9093"
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 2
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    volumes:
+      - ~/jalgoarena/kafka/kafka2/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+    network_mode: host
+
+  kafka3:
+    image: confluentinc/cp-kafka:4.0.1
+    hostname: kafka3
+    ports:
+      - "9094:9094"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka3:9094"
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 3
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    volumes:
+      - ~/jalgoarena/kafka/kafka3/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+    network_mode: host
+
+  eureka:
+    image: spolnik/jalgoarena-eureka:2.0.0
+    ports:
+      - "5000:5000"
+    network_mode: host
 
   api:
-    container_name: jalgoarena-api
-    build: ../JAlgoArena-Api
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-api:2.0.1
     ports:
-      - 5001:5001
-    tty: true
+      - "5001:5001"
+    depends_on:
+      - eureka
+    network_mode: host
 
   problems:
-    container_name: jalgoarena-problems
-    build: ../JAlgoArena-Problems
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-problems:2.0.0
     ports:
-      - 5002:5002
-    tty: true
+      - "5002:5002"
+    depends_on:
+      - eureka
+    network_mode: host
 
   auth:
-    container_name: jalgoarena-auth
-    build: ../JAlgoArena-Auth
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-auth:2.0.0
     ports:
-      - 5003:5003
-    tty: true
+      - "5003:5003"
+    volumes:
+      - ~/jalgoarena/users:/app/UserDetailsStore
+    depends_on:
+      - eureka
+    network_mode: host
 
   submissions:
-    container_name: jalgoarena-submissions
-    build: ../JAlgoArena-Submissions
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-submissions:2.0.0
     ports:
-      - 5004:5004
-    tty: true
+      - "5004:5004"
+    volumes:
+      - ~/jalgoarena/submissions:/app/SubmissionsStore
+    depends_on:
+      - api
+      - auth
+      - kafka1
+      - kafka2
+      - kafka3
+    network_mode: host
 
   events:
-    container_name: jalgoarena-events
-    build: ../JAlgoArena-Events
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-events:2.0.0
     ports:
-      - 5005:5005
-    tty: true
+      - "5005:5005"
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+    network_mode: host
 
   ranking:
-    container_name: jalgoarena-ranking
-    build: ../JAlgoArena-Ranking
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-ranking:2.0.0
     ports:
-      - 5006:5006
-    tty: true
+      - "5006:5006"
+    volumes:
+      - ~/jalgoarena/ranking:/app/RankingStore
+    depends_on:
+      - api
+      - auth
+      - kafka1
+      - kafka2
+      - kafka3
+    network_mode: host
 
   queue:
-    container_name: jalgoarena-queue
-    build: ../JAlgoArena-Queue
-    deploy:
-      restart_policy:
-        condition: on-failure
+    image: spolnik/jalgoarena-queue:2.0.0
     ports:
-      - 5007:5007
-    tty: true
+      - "5007:5007"
+    depends_on:
+      - api
+      - auth
+      - kafka1
+      - kafka2
+      - kafka3
+    network_mode: host
 
   judge:
-    container_name: jalgoarena-judge
-    build: ../JAlgoArena-Judge
+    image: spolnik/jalgoarena-judge:2.0.0
     deploy:
-      restart_policy:
-        condition: on-failure
+      replicas: 1
     ports:
-      - 5008:5008
-    tty: true
-
-  ui:
-    container_name: jalgoarena-ui
-    build: ../JAlgoArena-UI
-    deploy:
-      restart_policy:
-        condition: on-failure
-    ports:
-      - 3000:3000
-    tty: true
+      - "5008:5008"
+    depends_on:
+      - api
+      - auth
+      - kafka1
+      - kafka2
+      - kafka3
+    network_mode: host
