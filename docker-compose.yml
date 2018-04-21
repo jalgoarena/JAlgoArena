@@ -12,10 +12,10 @@ services:
       - "9092:9092"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka1
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:9092
-      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka1:9092"
+      KAFKA_LISTENERS: "PLAINTEXT://:9092"
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
       KAFKA_CREATE_TOPICS: "submissions:6:2,results:2:2,events:2:2"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -24,7 +24,7 @@ services:
       - eureka
 
   eureka:
-    image: spolnik/jalgoarena-eureka:2.0.0
+    image: spolnik/jalgoarena-eureka:2.0.1
     ports:
       - "5000:5000"
 
@@ -70,7 +70,7 @@ services:
       - kafka1
 
   ranking:
-    image: spolnik/jalgoarena-ranking:2.0.0
+    image: spolnik/jalgoarena-ranking:2.0.1
     ports:
       - "5006:5006"
     volumes:
@@ -101,7 +101,7 @@ services:
       - kafka1
 
   ui:
-    image: spolnik/jalgoarena-ui:2.0.1
+    image: spolnik/jalgoarena-ui:2.0.2
     ports:
       - "3000:3000"
     depends_on:
