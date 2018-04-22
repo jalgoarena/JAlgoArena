@@ -23,6 +23,38 @@ services:
       - zookeeper
       - eureka
 
+  kafka2:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka2
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka2:9093"
+      KAFKA_LISTENERS: "PLAINTEXT://:9093"
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+      - eureka
+
+  kafka3:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9094:9094"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka3
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka4:9094"
+      KAFKA_LISTENERS: "PLAINTEXT://:9094"
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+      - eureka
+
   eureka:
     image: spolnik/jalgoarena-eureka:2.0.1
     ports:
@@ -46,8 +78,8 @@ services:
     image: spolnik/jalgoarena-auth:2.0.0
     ports:
       - "5003:5003"
-    volumes:
-      - ~/jalgoarena/users:/app/UserDetailsStore
+#    volumes:
+#      - ~/jalgoarena/users:/app/UserDetailsStore
     depends_on:
       - eureka
 
@@ -55,12 +87,14 @@ services:
     image: spolnik/jalgoarena-submissions:2.0.0
     ports:
       - "5004:5004"
-    volumes:
-      - ~/jalgoarena/submissions:/app/SubmissionsStore
+#    volumes:
+#      - ~/jalgoarena/submissions:/app/SubmissionsStore
     depends_on:
       - api
       - auth
       - kafka1
+      - kafka2
+      - kafka3
 
   events:
     image: spolnik/jalgoarena-events:2.0.0
@@ -68,17 +102,21 @@ services:
       - "5005:5005"
     depends_on:
       - kafka1
+      - kafka2
+      - kafka3
 
   ranking:
     image: spolnik/jalgoarena-ranking:2.0.1
     ports:
       - "5006:5006"
-    volumes:
-      - ~/jalgoarena/ranking:/app/RankingStore
+#    volumes:
+#      - ~/jalgoarena/ranking:/app/RankingStore
     depends_on:
       - api
       - auth
       - kafka1
+      - kafka2
+      - kafka3
 
   queue:
     image: spolnik/jalgoarena-queue:2.0.0
@@ -88,6 +126,8 @@ services:
       - api
       - auth
       - kafka1
+      - kafka2
+      - kafka3
 
   judge:
     image: spolnik/jalgoarena-judge:2.0.0
@@ -99,6 +139,8 @@ services:
       - api
       - auth
       - kafka1
+      - kafka2
+      - kafka3
 
   ui:
     image: spolnik/jalgoarena-ui:2.0.2
