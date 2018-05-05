@@ -4,7 +4,6 @@ JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. 
 
 JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
 
-- [Demo](#demo)
 - [Introduction](#introduction)
 - [Components](#components)
 - [Kanban Board](#kanban-board)
@@ -18,7 +17,7 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 ## Introduction
 
 - JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems, in one of two languages: Kotlin and Java. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points. Additionally Kotlin language is promoted, giving you 150% of usual points in Java with same time.
-- JAlgoArena conduts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
+- JAlgoArena conducts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
 
 ![Component Diagram](https://github.com/spolnik/JAlgoArena/raw/master/design/component_diagram.png)
 
@@ -28,7 +27,6 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 - [JAlgoArena Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 - [JAlgoArena API Gateway](https://github.com/spolnik/JAlgoArena-API)
 - [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
-- [JAlgoArena Problems](https://github.com/spolnik/JAlgoArena-Problems)
 - [JAlgoArena Submissions](https://github.com/spolnik/JAlgoArena-Submissions)
 - [JAlgoArena Ranking](https://github.com/spolnik/JAlgoArena-Ranking)
 - [JAlgoArena Queue](https://github.com/spolnik/JAlgoArena-Queue)
@@ -82,7 +80,6 @@ To see detailed instructions on how to run particular components - go to below p
 * [Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 * [API Gateway](https://github.com/spolnik/JAlgoArena-API)
 * [Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
-* [Problems Service](https://github.com/spolnik/JAlgoArena-Problems)
 * [Queue Service](https://github.com/spolnik/JAlgoArena-Queue)
 * [Events Service](https://github.com/spolnik/JAlgoArena-Events)
 * [Judge Agent](https://github.com/spolnik/JAlgoArena-Judge)
@@ -93,25 +90,6 @@ To see detailed instructions on how to run particular components - go to below p
 ## Developing new Judge Agent
 
 - If you would like to develop new judge agent supporting new programming language, or using different approach for judgement - please follow instructions in here: [how to develop new judge agent](https://github.com/spolnik/JAlgoArena/wiki/Implementing-new-Judge-Agent)
-
-## Demo
-
-**deprecated**
-
-As JAlgoArena DEMO is hosted on free heroku account - they are goes every 5 minute sleep. If you want to successfully check below demo - firstly make sure you can open all below links to wake up all services
-
-* [jalgoarena-eureka](https://jalgoarena-eureka.herokuapp.com) - REQUIRED
-* [jalgoarena-judge](https://jalgoarena.herokuapp.com) - REQUIRED
-* [jalgoarena-api](https://jalgoarena-api.herokuapp.com) - REQUIRED
-* [jalgoarena-auth](https://jalgoarena-auth.herokuapp.com) - REQUIRED
-* [jalgoarena-problems](https://jalgoarena-problems.herokuapp.com) - REQUIRED
-* [jalgoarena-submissions](https://jalgoarena-submissions.herokuapp.com) - REQUIRED
-* [jalgoarena-judge-agent-1](https://jalgoarena-judge-agent-1.herokuapp.com) - OPTIONAL
-* [jalgoarena-judge-agent-2](https://jalgoarena-judge-agent-2.herokuapp.com) - OPTIONAL
-* [jalgoarena-judge-agent-3](https://jalgoarena-judge-agent-3.herokuapp.com) - OPTIONAL
-* [jalgoarena-judge-agent-4](https://jalgoarena-judge-agent-4.herokuapp.com) - OPTIONAL
-
-Demo: [https://jalgoarena-ui.herokuapp.com/](https://jalgoarena-ui.herokuapp.com/)
 
 ## Notes
 - [Travis Builds](https://travis-ci.org/spolnik)
