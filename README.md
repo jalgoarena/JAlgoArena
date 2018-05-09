@@ -1,26 +1,25 @@
-# JAlgoArena 2 [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena) [![JProfiler](https://github.com/spolnik/JAlgoArena/raw/master/design/jprofiler_small.png)](http://www.ej-technologies.com/products/jprofiler/overview.html)
+# JAlgoArena [![Build Status](https://travis-ci.org/spolnik/JAlgoArena.svg?branch=master)](https://travis-ci.org/spolnik/JAlgoArena) [![JProfiler](https://github.com/spolnik/JAlgoArena/raw/master/design/jprofiler_small.png)](http://www.ej-technologies.com/products/jprofiler/overview.html)
 
-JAlgoArena is a programming contest platform. You can use it in SaaS mode (e.g. Heroku) as well as on-premises (self-hosted) mode - which is great alternative to portals like HackerRank and others - when you are limited to only own infrastructure or you just don't want to pay for external service or help in organizing coding contest for your developers.
+JAlgoArena is a programming contest platform. You can host it on any infrastructure which runs Java & Node.JS.
 
-JAlgoArena itself is implemented as set of microservices, based on Spring Boot and hosted (in SaaS mode) on Heroku.
+> JAlgoArena is a great alternative to portals like HackerRank and similar - when you are limited to only own infrastructure or you just don't want to pay for external service or help in organizing coding contest for your developers.
 
-- [Introduction](#introduction)
-- [UI](#ui)
-- [Components](#components)
-- [Kanban Board](#kanban-board)
-- [E2E Tests](#e2e-tests)
-- [Continuous Delivery](#continuous-delivery)
-- [Infrastructure](#infrastructure)
-- [Running Locally](#running-locally)
-- [Developing new Judge Agent](#developing-new-judge-agent)
-- [Notes](#notes)
 
-## Introductio
+[Introduction](#introduction)  
+[UI](#ui)  
+[Architecture](#architecture)  
+[Components](#components)  
+[Kanban Board](#kanban-board)  
+[E2E Tests](#e2e-tests)  
+[Continuous Delivery](#continuous-delivery)  
+[Infrastructure](#infrastructure)  
+[Running Locally](#running-locally)  
+[Developing new Judge Agent](#developing-new-judge-agent)  
+[Notes](#notes)  
 
-- JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems, in one of two languages: Kotlin and Java. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points. Additionally Kotlin language is promoted, giving you 150% of usual points in Java with same time.
-- JAlgoArena conducts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
+## Introduction
 
-![Component Diagram](design/component_diagram.png)
+JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points.
 
 ## UI
 
@@ -41,6 +40,13 @@ JAlgoArena is created using Responsive UI based on bootstrap framework. Internal
 ![](design/ui/source_code.png)
   
 ![](design/ui/compile_error.png)
+
+## Architecture
+
+JAlgoArena conducts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
+
+![Component Diagram](design/component_diagram.png)
+
 
 ## Components
 
