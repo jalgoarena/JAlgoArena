@@ -120,7 +120,8 @@ To see detailed instructions on how to run particular components - go to below p
 * Install pm2 & webpack client - `npm install webpack-cli -g & npm install pm2 -g`
 * Download this repository
 * [Download kafka](https://kafka.apache.org/downloads)
-* [Download elasticsearch](https://www.elastic.co/downloads/elasticsearch), [logstash](https://www.elastic.co/downloads/logstash) and [kibana](https://www.elastic.co/downloads/kibana) - run them using default settings 
+* [Download elasticsearch](https://www.elastic.co/downloads/elasticsearch), [logstash](https://www.elastic.co/downloads/logstash) and [kibana](https://www.elastic.co/downloads/kibana) - run them using default settings
+  * for logstash use [logstash.conf](elk/logstash.conf) 
 * Kafka & Zookeeper - modify to set path and then run [pm2_install.sh](kafka/pm2_install.sh) from [kafka](kafka) directory.
 * [Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 * [API Gateway](https://github.com/spolnik/JAlgoArena-API)
