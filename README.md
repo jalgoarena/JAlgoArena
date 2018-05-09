@@ -27,18 +27,21 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 JAlgoArena is created using Responsive UI based on bootstrap framework. Internally all is done with usage of React components and bootstrap styles.
 
 ### Home Page
-* ![](design/ui/home.png)
+![](design/ui/home.png)
 ### Problems Page
-* ![](design/ui/problems.png)
+![](design/ui/problems.png)
 ### Problem Page (Fibonacci)
-* ![](design/ui/fib.png)  
-* ![](design/ui/fib_2.png)
+![](design/ui/fib.png)
+  
+![](design/ui/fib_2.png)
 ### Ranking Page (users, regions, teams & per programming language)
-* ![](design/ui/ranking.png)
+![](design/ui/ranking.png)
 ### Submissions Page
-* ![](design/ui/submissions.png)  
-* ![](design/ui/source_code.png)  
-* ![](design/ui/compile_error.png)
+![](design/ui/submissions.png)
+  
+![](design/ui/source_code.png)
+  
+![](design/ui/compile_error.png)
 
 ## Components
 
