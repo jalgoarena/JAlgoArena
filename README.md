@@ -15,7 +15,7 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 - [Developing new Judge Agent](#developing-new-judge-agent)
 - [Notes](#notes)
 
-## Introduction
+## Introductio
 
 - JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems, in one of two languages: Kotlin and Java. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points. Additionally Kotlin language is promoted, giving you 150% of usual points in Java with same time.
 - JAlgoArena conducts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
@@ -26,17 +26,16 @@ JAlgoArena itself is implemented as set of microservices, based on Spring Boot a
 
 JAlgoArena is created using Responsive UI based on bootstrap framework. Internally all is done with usage of React components and bootstrap styles.
 
-### Home Page
 ![](design/ui/home.png)
-### Problems Page
+
 ![](design/ui/problems.png)
-### Problem Page (Fibonacci)
+
 ![](design/ui/fib.png)
   
 ![](design/ui/fib_2.png)
-### Ranking Page (users, regions, teams & per programming language)
+
 ![](design/ui/ranking.png)
-### Submissions Page
+
 ![](design/ui/submissions.png)
   
 ![](design/ui/source_code.png)
