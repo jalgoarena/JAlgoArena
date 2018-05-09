@@ -19,11 +19,15 @@ JAlgoArena is a programming contest platform. You can host it on any infrastruct
 
 ## Introduction
 
-JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems. Every solution is limited by time and memory consumption and needs to pass all defined test cases. Problems itself are divided into three difficulty levels for each ones receiving different set of points.
+JAlgoArena allows user to see existing problems, create account and using it submit solutions for existing problems. 
+
+* Every solution is limited by time and memory consumption and needs to pass all defined test cases
+* Problems itself are divided into three difficulty levels for each ones receiving different set of points
 
 ## UI
 
-JAlgoArena is created using Responsive UI based on bootstrap framework. Internally all is done with usage of React components and bootstrap styles.
+* JAlgoArena is created using Responsive UI based on bootstrap framework. 
+* Internally all is done with usage of React components and bootstrap styles.
 
 ![](design/ui/home.png)
 
@@ -43,10 +47,20 @@ JAlgoArena is created using Responsive UI based on bootstrap framework. Internal
 
 ## Architecture
 
-JAlgoArena conducts many parts, coming from Web UI, going through API service, which finally reaches direct parts of JAlgoArena: Judge Engine for Kotlin and Java, Authentication & Authorization Service keeping info about Users, Problems Service holding definition and meta-data about avialable problems and finally Submissions Service, where submissions are stored and ranking is calculated. Finally - all of that behind of scene is orchestrated by Eureka (discovery service) - which allows on loosely coupling between services and easy way to scale them
+JAlgoArena conducts many parts, which can be divided to:
+* Node.JS hosted Web UI
+* set of backend microservices using Service Discovery
+* Apache Kafka used for messaging internally in the backend
+* Elastic Stack for capturing distributed logs
 
 ![Component Diagram](design/component_diagram.png)
 
+1. Publish submission to Kafka.
+1. Save new submission (JAlgoArena-Submissions) & start judge process (JAlgoArena-Judge)
+   1. Request submissions refresh via WebSocket subscriptions (JAlgoArena-Submissions)
+1. Publish submission result
+1. Store submission and ranking result (the second only if submission is accepted)
+1. Request ranking & submissions refresh via WebSocket subscriptions
 
 ## Components
 
@@ -54,13 +68,13 @@ JAlgoArena conducts many parts, coming from Web UI, going through API service, w
 - [JAlgoArena Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 - [JAlgoArena API Gateway](https://github.com/spolnik/JAlgoArena-API)
 - [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
-- [JAlgoArena Submissions](https://github.com/spolnik/JAlgoArena-Submissions)
-- [JAlgoArena Ranking](https://github.com/spolnik/JAlgoArena-Ranking)
 - [JAlgoArena Queue](https://github.com/spolnik/JAlgoArena-Queue)
+- [JAlgoArena Submissions](https://github.com/spolnik/JAlgoArena-Submissions)
 - [JAlgoArena Judge](https://github.com/spolnik/JAlgoArena-Judge)
+- [JAlgoArena Ranking](https://github.com/spolnik/JAlgoArena-Ranking)
 - [JAlgoArena Events](https://github.com/spolnik/JAlgoArena-Events)
 
-# Kanban Board
+## Kanban Board
 
 JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) showing planned features and their development progress.
 
@@ -68,7 +82,6 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 
 | State | Priority | Description |
 | ------------- | ------------- | ------------- |
-| Ideas | Unset | Not yet decided if they will be done |
 | Backlog | Low | To be done |
 | TODO | High | Will be done for the next releases |
 | In Progress | High | Features in progress |
@@ -77,7 +90,7 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 ## E2E Tests
 
 - end to end tests written in spock
-- it runs against deployed applications (Heroku)
+- it runs against locally running JAlgoArena
 - it covers 2 cases, 1st for Java and 2nd for Kotlin
 
 ## Continuous Delivery
@@ -86,7 +99,7 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 - in next stage, GitHub notifies Travis CI about changes
 - Travis CI runs whole continuous integration flow, running compilation, tests and generating reports
 - coverage report is sent to Codecov
-- application is deployed into Heroku machine
+- zip package is saved to GitHub releases per every component repository
 
 ![Continuous Delivery](https://github.com/spolnik/JAlgoArena/raw/master/design/continuous_delivery.png)
 
@@ -98,12 +111,17 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 - [Netflix Eureka](https://github.com/Netflix/eureka/wiki/Eureka-at-a-glance)
 - [Netflix Zuul 1.0](https://github.com/Netflix/zuul/wiki/How-it-Works)
 - TravisCI - [https://travis-ci.org/spolnik/JAlgoArena](https://travis-ci.org/spolnik/JAlgoArena)
-- Heroku (PaaS) or any other hosting infra
+- [ELK](https://www.elastic.co)
 
 ## Running locally
 
-To see detailed instructions on how to run particular components - go to below pages and look for running locally section. Below order is important if you want UI to be fully functional just after starting. Although - you can start it in any order - having some parts of functionallity not working till all parts will be started.
-* Kafka & Zookeeper - **TBD**
+To see detailed instructions on how to run particular components - go to below pages and look for running locally section. Below order is important if you want UI to be fully functional just after starting. Although - you can start it in any order - having some parts of functionality not working till all parts will be started.
+
+* Install pm2 & webpack client - `npm install webpack-cli -g & npm install pm2 -g`
+* Download this repository
+* [Download kafka](https://kafka.apache.org/downloads)
+* [Download elasticsearch](https://www.elastic.co/downloads/elasticsearch), [logstash](https://www.elastic.co/downloads/logstash) and [kibana](https://www.elastic.co/downloads/kibana) - run them using default settings 
+* Kafka & Zookeeper - modify to set path and then run [pm2_install.sh](kafka/pm2_install.sh) from [kafka](kafka) directory.
 * [Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 * [API Gateway](https://github.com/spolnik/JAlgoArena-API)
 * [Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
