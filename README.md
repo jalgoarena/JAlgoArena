@@ -6,7 +6,7 @@ JAlgoArena is a programming contest platform. You can host it on any infrastruct
 
 
 [Introduction](#introduction)  
-[Points Calculation](#points-calculation)
+[Points Calculation](#points-calculation)  
 [UI](#ui)  
 [Architecture](#architecture)  
 [Components](#components)  
