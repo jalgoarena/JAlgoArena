@@ -29,13 +29,25 @@ JAlgoArena allows user to see existing problems, create account and using it sub
 
 As calculating points within JAlgoArena is not a trivial thing, it requires detailed explanation - please find below all necessary information to understand how your points are calculated.
 
-* Firstly, base amount of points depends of problem difficultiy:
+* Firstly, base amount of points depends of problem difficulty:
   
   | Difficulty | Base points |
   | ---------- | ----------- |
   | Easy | 10 points |
   | Medium | 30 points |
   | Hard | 50 points |
+  
+* Secondly, amount of points which depends on time penalty:
+
+  | Elapsed Time / Time Limit | Time points |
+  | ------------------------- | ----------- |
+  | >= 500 | 1.0 |
+  | >= 100 | 3.0 |
+  | >= 10 | 5.0 |
+  | >= 1 | 8.0 |
+  | < 1 | 10.0 |
+  
+  > E.g. if time limit is 1 second, and you run your code in less than 1 millisecond 1 / 1 < 1 -> 10.0 points
   
 * In addition, problem solution with best time from all submissions (independently from language) gets 1 bonus point
 * For any language you solve, with every additional submission you get penalty:
