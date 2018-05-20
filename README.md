@@ -6,6 +6,7 @@ JAlgoArena is a programming contest platform. You can host it on any infrastruct
 
 
 [Introduction](#introduction)  
+[Points Calculation](#points-calculation)
 [UI](#ui)  
 [Architecture](#architecture)  
 [Components](#components)  
@@ -23,6 +24,21 @@ JAlgoArena allows user to see existing problems, create account and using it sub
 
 * Every solution is limited by time and memory consumption and needs to pass all defined test cases
 * Problems itself are divided into three difficulty levels for each ones receiving different set of points
+
+## Points Calculation
+
+As calculating points within JAlgoArena is not a trivial thing, it requires detailed explanation - please find below all necessary information to understand how your points are calculated.
+
+* Firstly, base amount of points depends of problem difficultiy:
+  * Easy problem - 10 points
+  * Medium problem - 30 points
+  * Hard problem - 50 points
+* In addition, problem solution with best time from all submissions (independently from language) gets 1 bonus point
+* For any language you solve, with every additional submission you get penalty:
+  * e.g. if you submitted 2 times problem solution in java, you will get minus 1 point of your result
+  * penalty is calculated till minimal amount of points for passed submission which is 1 point
+* Language rankings consider only particular programming language submissions/points
+* To general ranking, only best of your different programming languages submissions per problem is considered within your score
 
 ## UI
 
