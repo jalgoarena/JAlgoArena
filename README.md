@@ -56,6 +56,8 @@ As calculating points within JAlgoArena is not a trivial thing, it requires deta
 * Language rankings consider only particular programming language submissions/points
 * To general ranking, only best of your different programming languages submissions per problem is considered within your score
 
+> Note: you can always verify points of your submission within problem ranking, which can be accessed on problem page
+
 ## UI
 
 * JAlgoArena is created using Responsive UI based on bootstrap framework. 
