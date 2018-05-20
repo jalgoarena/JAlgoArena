@@ -30,9 +30,13 @@ JAlgoArena allows user to see existing problems, create account and using it sub
 As calculating points within JAlgoArena is not a trivial thing, it requires detailed explanation - please find below all necessary information to understand how your points are calculated.
 
 * Firstly, base amount of points depends of problem difficultiy:
-  * Easy problem - 10 points
-  * Medium problem - 30 points
-  * Hard problem - 50 points
+  
+  | Difficulty | Base points |
+  | ---------- | ----------- |
+  | Easy | 10 points |
+  | Medium | 30 points |
+  | Hard | 50 points |
+  
 * In addition, problem solution with best time from all submissions (independently from language) gets 1 bonus point
 * For any language you solve, with every additional submission you get penalty:
   * e.g. if you submitted 2 times problem solution in java, you will get minus 1 point of your result
