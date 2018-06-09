@@ -99,7 +99,6 @@ JAlgoArena conducts many parts, which can be divided to:
 ## Components
 
 - [JAlgoArena UI](https://github.com/spolnik/JAlgoArena-UI)
-- [JAlgoArena Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 - [JAlgoArena API Gateway](https://github.com/spolnik/JAlgoArena-API)
 - [JAlgoArena Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
 - [JAlgoArena Queue](https://github.com/spolnik/JAlgoArena-Queue)
@@ -139,6 +138,7 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 
 ## Infrastructure
 
+- [Consul](https://www.consul.io/) cluster used for service discovery
 - Xodus (embedded highly scalable database) - [Xodus home page](http://jetbrains.github.io/xodus/)
 - [Xodus Entities Browser](https://github.com/JetBrains/xodus-entity-browser)
 - [Apache Kafka](https://kafka.apache.org)
@@ -153,11 +153,11 @@ To see detailed instructions on how to run particular components - go to below p
 
 * Install pm2 & webpack client - `npm install webpack-cli -g & npm install pm2 -g`
 * Download this repository
+* [Download consul](https://www.consul.io/downloads.html) and run agents on every single host when you run jalgoarena microservices (on default ports)
 * [Download kafka](https://kafka.apache.org/downloads)
 * [Download elasticsearch](https://www.elastic.co/downloads/elasticsearch), [logstash](https://www.elastic.co/downloads/logstash) and [kibana](https://www.elastic.co/downloads/kibana) - run them using default settings
   * for logstash use [logstash.conf](elk/logstash.conf) 
 * Kafka & Zookeeper - modify to set path and then run [pm2_install.sh](kafka/pm2_install.sh) from [kafka](kafka) directory.
-* [Eureka Server](https://github.com/spolnik/JAlgoArena-Eureka)
 * [API Gateway](https://github.com/spolnik/JAlgoArena-API)
 * [Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
 * [Queue Service](https://github.com/spolnik/JAlgoArena-Queue)
