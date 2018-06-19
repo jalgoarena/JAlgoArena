@@ -2,10 +2,10 @@
   "service": {
     "name": "zookeeper",
     "port": 2181,
-    "checks": [
+    "checks": [{
       "tcp": "localhost:2181",
       "interval": "10s",
       "timeout": "1s"    
-    ]
+    }]
   }
 }
