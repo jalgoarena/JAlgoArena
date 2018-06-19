@@ -1,9 +1,11 @@
 {
-  "check": {
-    "id": "kafka1",
-    "name": "JAlgoArena Kafka on port 9092",
-    "tcp": "localhost:9092",
-    "interval": "10s",
-    "timeout": "1s"
+  "service": {
+    "name": "kafka1",
+    "port": 9092,
+    "checks": [
+      "tcp": "localhost:9092",
+      "interval": "10s",
+      "timeout": "1s"    
+    ]
   }
 }
