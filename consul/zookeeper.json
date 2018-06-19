@@ -1,9 +1,11 @@
 {
-  "check": {
-    "id": "zookeeper",
-    "name": "JAlgoArena Zookeeper on port 2181",
-    "tcp": "localhost:2181",
-    "interval": "10s",
-    "timeout": "1s"
+  "service": {
+    "name": "zookeeper",
+    "port": 2181,
+    "checks": [
+      "tcp": "localhost:2181",
+      "interval": "10s",
+      "timeout": "1s"    
+    ]
   }
 }
