@@ -1,6 +1,6 @@
 {
   "service": {
-    "name": "kafka1",
+    "name": "kafka2",
     "port": 9093,
     "checks": [{
       "tcp": "localhost:9093",
