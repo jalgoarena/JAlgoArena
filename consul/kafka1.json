@@ -2,10 +2,10 @@
   "service": {
     "name": "kafka1",
     "port": 9092,
-    "checks": [
+    "checks": [{
       "tcp": "localhost:9092",
       "interval": "10s",
       "timeout": "1s"    
-    ]
+    }]
   }
 }
