@@ -1,0 +1,30 @@
+{
+  "services": [{
+    "name": "kafka",
+    "id": "kafka1",
+    "port": 9092,
+    "checks": [{
+      "tcp": "localhost:9092",
+      "interval": "10s",
+      "timeout": "1s"    
+    }]
+  },{
+    "name": "kafka",
+    "id": "kafka2",
+    "port": 9093,
+    "checks": [{
+      "tcp": "localhost:9093",
+      "interval": "10s",
+      "timeout": "1s"
+    }]
+  },{
+    "name": "kafka",
+    "id": "kafka3",
+    "port": 9094,
+    "checks": [{
+      "tcp": "localhost:9094",
+      "interval": "10s",
+      "timeout": "1s"
+    }]
+  }]
+}
