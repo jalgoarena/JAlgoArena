@@ -142,7 +142,6 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 - Xodus (embedded highly scalable database) - [Xodus home page](http://jetbrains.github.io/xodus/)
 - [Xodus Entities Browser](https://github.com/JetBrains/xodus-entity-browser)
 - [Apache Kafka](https://kafka.apache.org)
-- [Netflix Eureka](https://github.com/Netflix/eureka/wiki/Eureka-at-a-glance)
 - [Netflix Zuul 1.0](https://github.com/Netflix/zuul/wiki/How-it-Works)
 - TravisCI - [https://travis-ci.org/spolnik/JAlgoArena](https://travis-ci.org/spolnik/JAlgoArena)
 - [ELK](https://www.elastic.co)
