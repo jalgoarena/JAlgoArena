@@ -29,3 +29,7 @@ docker run -d --net=host --name=jalgoarena-submissions -v /home/jacek/github/JAl
 echo "Submissions Started"
 docker run -d --net=host --name=jalgoarena-ranking -v /home/jacek/github/JAlgoArena-Ranking/RankingStore:/app/RankingStore spolnik/jalgoarena-ranking:latest
 echo "Ranking Started"
+
+echo "Starting UI"
+docker run -d --net=host --name=jalgoarena-ui spolnik/jalgoarena-ui:latest
+echo "All Started!"
