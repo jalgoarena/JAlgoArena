@@ -1,0 +1,11 @@
+{
+  "service": {
+    "name": "jalgoarena-api",
+    "port": 5001,
+    "checks": [{
+      "tcp": "localhost:5001",
+      "interval": "10s",
+      "timeout": "1s"    
+    }]
+  }
+}

@@ -1,0 +1,14 @@
+defaultEntryPoints = ["http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":5001"
+
+  [entryPoints.dashboard]
+  address = ":15001"
+
+[api]
+entryPoint = "dashboard"
+dashboard = true
+
+[consulCatalog]
