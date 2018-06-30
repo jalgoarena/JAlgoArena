@@ -25,9 +25,9 @@ docker run -d --net=host --name=jalgoarena-judge-3 -e PORT=6002 -e BOOTSTRAP_SER
 echo "Judge 3 Started"
 docker run -d --net=host --name=jalgoarena-auth -v $HOME/jalgoarena/UserDetailsStore:/app/UserDetailsStore spolnik/jalgoarena-auth:latest
 echo "Auth Started"
-docker run -d --net=host --name=jalgoarena-submissions -v $HOME/jalgoarena/SubmissionsStore:/app/SubmissionsStore spolnik/jalgoarena-submissions:latest
+docker run -d --net=host --name=jalgoarena-submissions -v $HOME/jalgoarena/SubmissionsStore:/app/SubmissionsStore -e BOOTSTRAP_SERVERS=localhost:9092,localhost:9093,localhost:9094 spolnik/jalgoarena-submissions:latest
 echo "Submissions Started"
-docker run -d --net=host --name=jalgoarena-ranking -v $HOME/jalgoarena/RankingStore:/app/RankingStore spolnik/jalgoarena-ranking:latest
+docker run -d --net=host --name=jalgoarena-ranking -v $HOME/jalgoarena/RankingStore:/app/RankingStore -e BOOTSTRAP_SERVERS=localhost:9092,localhost:9093,localhost:9094 spolnik/jalgoarena-ranking:latest
 echo "Ranking Started"
 
 echo "Starting UI"

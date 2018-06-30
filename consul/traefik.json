@@ -1,6 +1,6 @@
 {
   "service": {
-    "name": "jalgoarena-api",
+    "name": "traefik",
     "port": 5001,
     "checks": [{
       "tcp": "localhost:5001",
