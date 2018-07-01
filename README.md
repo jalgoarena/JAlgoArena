@@ -124,7 +124,6 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 
 - end to end tests written in spock
 - it runs against locally running JAlgoArena
-- it covers 2 cases, 1st for Java and 2nd for Kotlin
 
 ## Continuous Delivery
 
