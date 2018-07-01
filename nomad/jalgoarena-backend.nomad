@@ -92,7 +92,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-judge:2.2.451"
+        image = "spolnik/jalgoarena-judge:2.2.455"
         network_mode = "host"
       }
 
@@ -123,7 +123,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-judge:2.2.451"
+        image = "spolnik/jalgoarena-judge:2.2.455"
         network_mode = "host"
       }
 
