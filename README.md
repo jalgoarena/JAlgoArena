@@ -154,7 +154,7 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 * [Download nomad](https://nomadproject.io/downloads.html) and run agents on every machine when you want to run jalgoarena services
   * Example command to run locally: `nomad agent -dev`
 * Copy to your workspace [nomad](nomad) directory - that's the place from where we will run JAlgoArena and that's where your data and configuration will be stored.
-* Go to `nomad` directory, and run below commands in order (before running next, verify on [http://localhost:4646/ui/jobs] that previous job is successful):
+* Go to `nomad` directory, and run below commands in order (before running next, verify on [Nomad Web Console](http://localhost:4646/ui/jobs) that previous job is successful):
   1. `nomad job run jalgoarena-elk.nomad`
   1. `nomad job run jalgoarena-kafka.nomad`
   1. `nomad job run jalgoarena-backend.nomad`
