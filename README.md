@@ -148,23 +148,23 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
 
 ## Running locally
 
-To see detailed instructions on how to run particular components - go to below pages and look for running locally section. Below order is important if you want UI to be fully functional just after starting. Although - you can start it in any order - having some parts of functionality not working till all parts will be started.
-
-* Install pm2 & webpack client - `npm install webpack-cli -g & npm install pm2 -g`
-* Download this repository
-* [Download consul](https://www.consul.io/downloads.html) and run agents on every single host when you run jalgoarena microservices (on default ports)
-* [Download kafka](https://kafka.apache.org/downloads)
-* [Download elasticsearch](https://www.elastic.co/downloads/elasticsearch), [logstash](https://www.elastic.co/downloads/logstash) and [kibana](https://www.elastic.co/downloads/kibana) - run them using default settings
-  * for logstash use [logstash.conf](elk/logstash.conf) 
-* Kafka & Zookeeper - modify to set path and then run [pm2_install.sh](kafka/pm2_install.sh) from [kafka](kafka) directory.
-* [Download traefik](https://traefik.io) and run service with [traefik.toml](traefik/traefik.toml) configuration (`./traefik -c traeifk.toml`)
-* [Auth Server](https://github.com/spolnik/JAlgoArena-Auth)
-* [Queue Service](https://github.com/spolnik/JAlgoArena-Queue)
-* [Events Service](https://github.com/spolnik/JAlgoArena-Events)
-* [Judge Agent](https://github.com/spolnik/JAlgoArena-Judge)
-* [Submissions Service](https://github.com/spolnik/JAlgoArena-Submissions)
-* [Ranking Service](https://github.com/spolnik/JAlgoArena-Ranking)
-* [UI Server](https://github.com/spolnik/JAlgoArena-UI)
+* Setup docker locally
+* [Download consul](https://www.consul.io/downloads.html) and run agents on every machine when you want to run jalgoarena services
+  * Example command to run via docker: `docker run -d --net=host --name=consul -e CONSUL_UI_BETA=true consul agent -server -ui -bootstrap-expect=1 -bind=192.168.63.21` 
+* [Download nomad](https://nomadproject.io/downloads.html) and run agents on every machine when you want to run jalgoarena services
+  * Example command to run locally: `nomad agent -dev`
+* Copy to your workspace [nomad](nomad) directory - that's the place from where we will run JAlgoArena and that's where your data and configuration will be stored.
+* Go to `nomad` directory, and run below commands in order (before running next, verify on [http://localhost:4646/ui/jobs] that previous job is successful):
+  # `nomad job run jalgoarena-elk.nomad`
+  # `nomad job run jalgoarena-kafka.nomad`
+  # `nomad job run jalgoarena-backend.nomad`
+  # `nomad job run jalgoarena-frontend.nomad` 
+* Now you should be able to access:
+  * [Consul Web UI](http://localhost:8500/ui/)
+  * [Traefik Web Dashboard](http://localhost:15001/dashboard/)
+  * [Nomad Web Console](http://localhost:4646/ui)
+  * [Kibana Web UI](http://localhost:5601/app/kibana)
+  * [JAlgoArena UI](http://localhost:3000)
 
 ## Developing new Judge Agent
 
