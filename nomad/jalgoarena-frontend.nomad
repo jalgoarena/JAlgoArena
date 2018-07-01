@@ -45,7 +45,7 @@ job "jalgoarena-frontend" {
 
       service {
         name = "traefik"
-        tags = ["traefik"]
+        tags = ["traefik", "traefik.enable=false"]
         address_mode = "driver"
         port = 5001
         check {
@@ -81,6 +81,19 @@ job "jalgoarena-frontend" {
       resources {
         cpu    = 750
         memory = 1000
+      }
+
+      service {
+        name = "jalgoarena-ui"
+        tags = ["ui", "traefik.enable=false"]
+        address_mode = "driver"
+        port = 3000
+        check {
+          type      = "tcp"
+          address_mode = "driver"
+          interval  = "10s"
+          timeout   = "1s"
+        }
       }
     }
   }

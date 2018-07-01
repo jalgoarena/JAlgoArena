@@ -48,7 +48,7 @@ job "jalgoarena-kafka" {
 
       service {
         name = "zookeeper"
-        tags = ["zookeeper"]
+        tags = ["zookeeper", "traefik.enable=false"]
         port = 2181
         address_mode = "driver"
         check {
@@ -94,7 +94,7 @@ job "jalgoarena-kafka" {
 
       service {
         name = "kafka1"
-        tags = ["kafka"]
+        tags = ["kafka", "traefik.enable=false"]
         port = 9092
         address_mode = "driver"
         check {
@@ -140,7 +140,7 @@ job "jalgoarena-kafka" {
 
       service {
         name = "kafka2"
-        tags = ["kafka"]
+        tags = ["kafka", "traefik.enable=false"]
         port = 9093
         address_mode = "driver"
         check {
@@ -186,7 +186,7 @@ job "jalgoarena-kafka" {
 
       service {
         name = "kafka3"
-        tags = ["kafka"]
+        tags = ["kafka", "traefik.enable=false"]
         port = 9094
         address_mode = "driver"
         check {

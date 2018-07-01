@@ -43,8 +43,8 @@ job "jalgoarena-elk" {
       }
 
       service {
-        name = "elastichsearch"
-        tags = ["elk"]
+        name = "elasticsearch"
+        tags = ["elk", "traefik.enable=false"]
         port = 9200
         address_mode = "driver"
         check {
@@ -84,7 +84,7 @@ job "jalgoarena-elk" {
 
       service {
         name = "kibana"
-        tags = ["elk"]
+        tags = ["elk", "traefik.enable=false"]
         port = 5601
         address_mode = "driver"
         check {
@@ -132,7 +132,7 @@ job "jalgoarena-elk" {
 
       service {
         name = "logstash"
-        tags = ["elk"]
+        tags = ["elk", "traefik.enable=false"]
         port = 9600
         address_mode = "driver"
         check {
