@@ -119,7 +119,7 @@ job "jalgoarena-elk" {
       config {
         image = "logstash"
         network_mode = "host"
-        volumes = ["data/logstash:/config-dir"]
+        volumes = ["/home/jacek/jalgoarena-config/logstash:/config-dir"]
         args = [
           "-f", "/config-dir/logstash.conf"
         ]

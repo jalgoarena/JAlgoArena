@@ -35,7 +35,7 @@ job "jalgoarena-backend" {
       config {
         image = "spolnik/jalgoarena-auth:2.2.115"
         network_mode = "host"
-        volumes = ["data/UserDetailsStore:/app/UserDetailsStore"]
+        volumes = ["/home/jacek/jalgoarena-config/UserDetailsStore:/app/UserDetailsStore"]
       }
 
       resources {
@@ -188,7 +188,7 @@ job "jalgoarena-backend" {
       config {
         image = "spolnik/jalgoarena-ranking:2.2.41"
         network_mode = "host"
-        volumes = ["data/RankingStore:/app/RankingStore"]
+        volumes = ["/home/jacek/jalgoarena-config/RankingStore:/app/RankingStore"]
       }
 
       resources {
@@ -220,7 +220,7 @@ job "jalgoarena-backend" {
       config {
         image = "spolnik/jalgoarena-submissions:2.2.157"
         network_mode = "host"
-        volumes = ["data/SubmissionsStore:/app/SubmissionsStore"]
+        volumes = ["/home/jacek/jalgoarena-config/SubmissionsStore:/app/SubmissionsStore"]
       }
 
       resources {

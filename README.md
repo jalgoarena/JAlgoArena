@@ -153,8 +153,10 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
   * Example command to run via docker: `docker run -d --net=host --name=consul -e CONSUL_UI_BETA=true consul agent -server -ui -bootstrap-expect=1 -bind=192.168.63.21` 
 * [Download nomad](https://nomadproject.io/downloads.html) and run agents on every machine when you want to run jalgoarena services
   * Example command to run locally: `nomad agent -dev`
-* Copy to your workspace [nomad](nomad) directory - that's the place from where we will run JAlgoArena and that's where your data and configuration will be stored.
+* Copy locally [nomad](nomad) directory
+* Copy locally [jalgoarena-config](jalgoarena-config) directory - that's where your data and configuration will be stored.
 * Go to `nomad` directory, and run below commands in order (before running next, verify on [Nomad Web Console](http://localhost:4646/ui/jobs) that previous job is successful):
+  > Before running below, you need to edit nomad files and replace `/home/jacek/jalgoarena-config` paths to your local path with copied `jalgoarena-config` dir 
   1. `nomad job run jalgoarena-elk.nomad`
   1. `nomad job run jalgoarena-kafka.nomad`
   1. `nomad job run jalgoarena-backend.nomad`
@@ -165,6 +167,7 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
   * [Nomad Web Console](http://localhost:4646/ui)
   * [Kibana Web UI](http://localhost:5601/app/kibana)
   * [JAlgoArena UI](http://localhost:3000)
+  > Note - if that's first time ever when your run JAlgoArena - you will be able to find `admin` password within `JAlgoArena-Auth` logs
 
 ## Developing new Judge Agent
 
