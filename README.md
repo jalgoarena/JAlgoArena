@@ -155,10 +155,10 @@ JAlgoArena [kanban board](https://github.com/spolnik/JAlgoArena/projects/1) show
   * Example command to run locally: `nomad agent -dev`
 * Copy to your workspace [nomad](nomad) directory - that's the place from where we will run JAlgoArena and that's where your data and configuration will be stored.
 * Go to `nomad` directory, and run below commands in order (before running next, verify on [http://localhost:4646/ui/jobs] that previous job is successful):
-  # `nomad job run jalgoarena-elk.nomad`
-  # `nomad job run jalgoarena-kafka.nomad`
-  # `nomad job run jalgoarena-backend.nomad`
-  # `nomad job run jalgoarena-frontend.nomad` 
+  1. `nomad job run jalgoarena-elk.nomad`
+  1. `nomad job run jalgoarena-kafka.nomad`
+  1. `nomad job run jalgoarena-backend.nomad`
+  1. `nomad job run jalgoarena-frontend.nomad` 
 * Now you should be able to access:
   * [Consul Web UI](http://localhost:8500/ui/)
   * [Traefik Web Dashboard](http://localhost:15001/dashboard/)

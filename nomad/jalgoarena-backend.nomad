@@ -33,7 +33,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-auth:2.2.113"
+        image = "spolnik/jalgoarena-auth:2.2.115"
         network_mode = "host"
         volumes = ["data/UserDetailsStore:/app/UserDetailsStore"]
       }
@@ -92,7 +92,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-judge:2.2.449"
+        image = "spolnik/jalgoarena-judge:2.2.451"
         network_mode = "host"
       }
 
@@ -123,7 +123,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-judge:2.2.449"
+        image = "spolnik/jalgoarena-judge:2.2.451"
         network_mode = "host"
       }
 
@@ -155,7 +155,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-queue:2.2.30"
+        image = "spolnik/jalgoarena-queue:2.2.32"
         network_mode = "host"
       }
 
@@ -186,7 +186,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-ranking:2.2.40"
+        image = "spolnik/jalgoarena-ranking:2.2.41"
         network_mode = "host"
         volumes = ["data/RankingStore:/app/RankingStore"]
       }
@@ -218,7 +218,7 @@ job "jalgoarena-backend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-submissions:2.2.154"
+        image = "spolnik/jalgoarena-submissions:2.2.157"
         network_mode = "host"
         volumes = ["data/SubmissionsStore:/app/SubmissionsStore"]
       }
