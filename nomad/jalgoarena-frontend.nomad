@@ -74,7 +74,7 @@ job "jalgoarena-frontend" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-ui:2.2.5"
+        image = "spolnik/jalgoarena-ui:2.3.1"
         network_mode = "host"
       }
 
