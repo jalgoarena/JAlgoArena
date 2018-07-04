@@ -1,4 +1,4 @@
-job "jalgoarena-frontend" {
+job "jalgoarena-traefik" {
   datacenters = ["dc1"]
 
   update {
@@ -48,46 +48,6 @@ job "jalgoarena-frontend" {
         tags = ["traefik", "traefik.enable=false"]
         address_mode = "driver"
         port = 5001
-        check {
-          type      = "tcp"
-          address_mode = "driver"
-          interval  = "10s"
-          timeout   = "1s"
-        }
-      }
-    }
-  }
-
-  group "ui-docker" {
-    restart {
-      attempts = 2
-      interval = "30m"
-      delay = "15s"
-      mode = "fail"
-    }
-
-    ephemeral_disk {
-      size = 1000
-    }
-
-    task "jalgoarena-ui" {
-      driver = "docker"
-
-      config {
-        image = "spolnik/jalgoarena-ui:2.3.1"
-        network_mode = "host"
-      }
-
-      resources {
-        cpu    = 750
-        memory = 1000
-      }
-
-      service {
-        name = "jalgoarena-ui"
-        tags = ["ui", "traefik.enable=false"]
-        address_mode = "driver"
-        port = 3000
         check {
           type      = "tcp"
           address_mode = "driver"
