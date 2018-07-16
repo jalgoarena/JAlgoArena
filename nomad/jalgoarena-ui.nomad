@@ -33,7 +33,7 @@ job "jalgoarena-ui" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/ui:2.3.4"
+        image = "jalgoarena/ui:2.3.6"
         network_mode = "host"
       }
 
