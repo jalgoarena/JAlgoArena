@@ -33,7 +33,7 @@ job "jalgoarena-queue" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/queue:2.3.37"
+        image = "jalgoarena/queue:2.3.39"
         network_mode = "host"
       }
 

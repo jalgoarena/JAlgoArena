@@ -33,7 +33,7 @@ job "jalgoarena-judge" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/judge:2.3.474"
+        image = "jalgoarena/judge:2.3.475"
         network_mode = "host"
       }
 
@@ -66,7 +66,7 @@ job "jalgoarena-judge" {
       driver = "docker"
 
       config {
-        image = "spolnik/jalgoarena-judge:2.3.471"
+        image = "jalgoarena/judge:2.3.475"
         network_mode = "host"
       }
 

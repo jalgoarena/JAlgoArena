@@ -33,7 +33,7 @@ job "jalgoarena-auth" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/auth:2.3.123"
+        image = "jalgoarena/auth:2.3.125"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/UserDetailsStore:/app/UserDetailsStore"]
       }

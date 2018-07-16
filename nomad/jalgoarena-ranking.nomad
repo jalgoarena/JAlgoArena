@@ -33,7 +33,7 @@ job "jalgoarena-ranking" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/ranking:2.3.47"
+        image = "jalgoarena/ranking:2.3.49"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/RankingStore:/app/RankingStore"]
       }
