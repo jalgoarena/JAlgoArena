@@ -33,14 +33,18 @@ job "jalgoarena-submissions" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/submissions:2.3.159"
+        image = "jalgoarena/submissions:2.3.168"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/SubmissionsStore:/app/SubmissionsStore"]
       }
 
       resources {
         cpu    = 750
-        memory = 2000
+        memory = 750
+      }
+
+      env {
+        JAVA_OPTS = "-Xmx512m -Xms50m"
       }
     }
   }

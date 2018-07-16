@@ -33,17 +33,18 @@ job "jalgoarena-events" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/events:2.2.22"
+        image = "jalgoarena/events:2.3.26"
         network_mode = "host"
       }
 
       resources {
         cpu    = 750
-        memory = 2000
+        memory = 750
       }
 
       env {
         BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
+        JAVA_OPTS = "-Xmx512m -Xms50m"
       }
     }
   }

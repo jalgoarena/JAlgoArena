@@ -33,14 +33,18 @@ job "jalgoarena-auth" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/auth:2.2.115"
+        image = "jalgoarena/auth:2.3.123"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/UserDetailsStore:/app/UserDetailsStore"]
       }
 
       resources {
         cpu    = 750
-        memory = 2000
+        memory = 750
+      }
+
+      env {
+        JAVA_OPTS = "-Xmx512m -Xms50m"
       }
     }
   }

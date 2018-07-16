@@ -1,5 +1,7 @@
-job "jalgoarena-ui" {
+job "jalgoarena-logstash" {
   datacenters = ["dc1"]
+
+  type = "system"
 
   update {
     max_parallel = 1
@@ -10,14 +12,7 @@ job "jalgoarena-ui" {
     canary = 0
   }
 
-  migrate {
-    max_parallel = 1
-    health_check = "checks"
-    min_healthy_time = "10s"
-    healthy_deadline = "5m"
-  }
-
-  group "ui-docker" {
+  group "logstash-docker" {
     restart {
       attempts = 2
       interval = "30m"
@@ -29,24 +24,28 @@ job "jalgoarena-ui" {
       size = 1000
     }
 
-    task "jalgoarena-ui" {
+    task "logstash" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/ui:2.3.4"
+        image = "logstash"
         network_mode = "host"
+        volumes = ["/home/jacek/jalgoarena-config/logstash:/config-dir"]
+        args = [
+          "-f", "/config-dir/logstash.conf"
+        ]
       }
 
       resources {
-        cpu    = 750
+        cpu    = 500
         memory = 750
       }
 
       service {
-        name = "jalgoarena-ui"
-        tags = ["ui", "traefik.enable=false"]
+        name = "logstash"
+        tags = ["elk", "traefik.enable=false"]
+        port = 9600
         address_mode = "driver"
-        port = 3000
         check {
           type      = "tcp"
           address_mode = "driver"

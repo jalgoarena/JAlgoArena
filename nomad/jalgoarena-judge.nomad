@@ -33,18 +33,20 @@ job "jalgoarena-judge" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/judge:2.3.471"
+        image = "jalgoarena/judge:2.3.474"
         network_mode = "host"
       }
 
       resources {
         cpu    = 1000
-        memory = 2000
+        memory = 1500
       }
 
       env {
         BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
+        JAVA_OPTS = "-Xmx1g -Xms512m"
       }
+
     }
   }
 
@@ -70,11 +72,12 @@ job "jalgoarena-judge" {
 
       resources {
         cpu    = 1000
-        memory = 2000
+        memory = 1500
       }
 
       env {
         BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
+        JAVA_OPTS = "-Xmx1g -Xms512m"
         PORT = 6001
       }
     }

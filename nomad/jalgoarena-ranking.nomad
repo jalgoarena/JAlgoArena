@@ -33,18 +33,19 @@ job "jalgoarena-ranking" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/ranking:2.3.44"
+        image = "jalgoarena/ranking:2.3.47"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/RankingStore:/app/RankingStore"]
       }
 
       resources {
         cpu    = 1000
-        memory = 2000
+        memory = 750
       }
 
       env {
         BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
+        JAVA_OPTS = "-Xmx512m -Xms50m"
       }
     }
   }

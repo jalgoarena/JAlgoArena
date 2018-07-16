@@ -33,17 +33,18 @@ job "jalgoarena-queue" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/queue:2.3.33"
+        image = "jalgoarena/queue:2.3.37"
         network_mode = "host"
       }
 
       resources {
         cpu    = 750
-        memory = 2000
+        memory = 750
       }
 
       env {
         BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
+        JAVA_OPTS = "-Xmx512m -Xms50m"
       }
     }
   }
