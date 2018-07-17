@@ -46,6 +46,15 @@ job "jalgoarena-submissions" {
       env {
         JAVA_OPTS = "-Xmx512m -Xms50m"
       }
+
+      template {
+        data = <<EOH
+BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
+EOH
+
+        destination = "submissions/config.env"
+        env         = true
+      }
     }
   }
 }

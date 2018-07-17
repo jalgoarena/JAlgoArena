@@ -43,10 +43,17 @@ job "jalgoarena-judge" {
       }
 
       env {
-        BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
         JAVA_OPTS = "-Xmx1g -Xms512m"
       }
 
+      template {
+        data = <<EOH
+BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
+EOH
+
+        destination = "judge/config.env"
+        env         = true
+      }
     }
   }
 
@@ -76,9 +83,17 @@ job "jalgoarena-judge" {
       }
 
       env {
-        BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094"
         JAVA_OPTS = "-Xmx1g -Xms512m"
         PORT = 6001
+      }
+
+      template {
+        data = <<EOH
+BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
+EOH
+
+        destination = "config.env"
+        env         = true
       }
     }
   }
