@@ -7,7 +7,7 @@ job "jalgoarena-elk" {
     auto_revert = true
   }
 
-  group "elasticsearch-docker" {
+  group "elk-docker" {
 
     ephemeral_disk {
       size = 2000
@@ -17,57 +17,56 @@ job "jalgoarena-elk" {
       driver = "docker"
 
       config {
-        image = "elasticsearch"
+        image = "elasticsearch:5.6.10-alpine"
         network_mode = "host"
       }
 
       resources {
         cpu    = 1000
         memory = 3000
+        network {
+          port "elasticsearch" {
+            static = 9200
+          }
+        }
       }
 
       service {
         name = "elasticsearch"
         tags = ["elk", "traefik.enable=false"]
-        port = 9200
-        address_mode = "driver"
+        port = "elasticsearch"
         check {
           type      = "tcp"
-          address_mode = "driver"
           interval  = "10s"
           timeout   = "1s"
         }
       }
-    }
-  }
-
-  group "kibana-docker" {
-
-    ephemeral_disk {
-      size = 1000
     }
 
     task "kibana" {
       driver = "docker"
 
       config {
-        image = "kibana"
+        image = "kibana:5.6.10"
         network_mode = "host"
       }
 
       resources {
         cpu    = 500
         memory = 500
+        network {
+          port "kibana" {
+            static = 5601
+          }
+        }
       }
 
       service {
         name = "kibana"
         tags = ["elk", "traefik.enable=false"]
-        port = 5601
-        address_mode = "driver"
+        port = "kibana"
         check {
           type      = "tcp"
-          address_mode = "driver"
           interval  = "10s"
           timeout   = "1s"
         }

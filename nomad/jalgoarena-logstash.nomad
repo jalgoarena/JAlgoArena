@@ -19,7 +19,7 @@ job "jalgoarena-logstash" {
       driver = "docker"
 
       config {
-        image = "logstash"
+        image = "logstash:5.6.10-alpine"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/logstash:/config-dir"]
         args = [
@@ -30,16 +30,19 @@ job "jalgoarena-logstash" {
       resources {
         cpu    = 500
         memory = 750
+        network {
+          port "logstash" {
+            static = 9600
+          }
+        }
       }
 
       service {
         name = "logstash"
         tags = ["elk", "traefik.enable=false"]
-        port = 9600
-        address_mode = "driver"
+        port = "logstash"
         check {
           type      = "tcp"
-          address_mode = "driver"
           interval  = "10s"
           timeout   = "1s"
         }
