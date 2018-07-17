@@ -8,26 +8,44 @@ job "jalgoarena-events" {
   }
 
   group "events-docker" {
+    count = 2
 
     ephemeral_disk {
-      size = 500
+      size = 300
     }
 
     task "jalgoarena-events" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/events:2.3.28"
+        image = "jalgoarena/events:2.4.32"
         network_mode = "host"
       }
 
       resources {
-        cpu    = 750
-        memory = 750
+        cpu    = 500
+        memory = 512
+        network {
+          port "http" {}
+        }
       }
 
       env {
-        JAVA_OPTS = "-Xmx512m -Xms50m"
+        KAFKA_CONSUMER_GROUP_ID = "events-${NOMAD_ALLOC_INDEX}"
+        PORT = "${NOMAD_PORT_http}"
+        JAVA_OPTS = "-Xmx400m -Xms50m"
+      }
+
+      service {
+        name = "jalgoarena-events"
+        tags = ["secure=false"]
+        port = "http"
+        check {
+          type          = "http"
+          path          = "/actuator/health"
+          interval      = "10s"
+          timeout       = "1s"
+        }
       }
 
       template {
