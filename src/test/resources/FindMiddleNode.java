@@ -17,6 +17,6 @@ public class Solution {
             fast = fast.next.next;
         }
 
-        return slow;
+        return (fast == null) ? slow : slow.next;
     }
 }
