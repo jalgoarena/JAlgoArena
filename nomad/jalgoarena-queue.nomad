@@ -3,27 +3,12 @@ job "jalgoarena-queue" {
 
   update {
     max_parallel = 1
-    min_healthy_time = "10s"
     healthy_deadline = "3m"
-    progress_deadline = "10m"
-    auto_revert = false
-    canary = 0
-  }
-
-  migrate {
-    max_parallel = 1
-    health_check = "checks"
-    min_healthy_time = "10s"
-    healthy_deadline = "5m"
+    auto_revert = true
   }
 
   group "queue-docker" {
-    restart {
-      attempts = 2
-      interval = "30m"
-      delay = "15s"
-      mode = "fail"
-    }
+    count = 2
 
     ephemeral_disk {
       size = 500
@@ -33,25 +18,42 @@ job "jalgoarena-queue" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/queue:2.3.39"
+        image         = "jalgoarena/queue:2.4.42"
         network_mode = "host"
       }
 
       resources {
-        cpu    = 750
-        memory = 750
+        cpu    = 512
+        memory = 512
+        network {
+          port "http" {}
+        }
       }
 
       env {
-        JAVA_OPTS = "-Xmx512m -Xms50m"
+        PORT = "${NOMAD_PORT_http}"
+        JAVA_OPTS = "-Xmx400m -Xms50m"
+      }
+
+      service {
+        name = "jalgoarena-queue"
+        tags = ["traefik.frontend.rule=PathPrefixStrip:/queue/api", "secure=false"]
+        port = "http"
+        check {
+          type          = "http"
+          path          = "/actuator/health"
+          interval      = "10s"
+          timeout       = "1s"
+        }
       }
 
       template {
         data = <<EOH
-BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
+BOOTSTRAP_SERVERS = "{{ range $index, $element := service "kafka1" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }},{{ range $index, $element := service "kafka2" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }},{{ range $index, $element := service "kafka3" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }}"
+JALGOARENA_API_URL = "http://{{ range $index, $element := service "traefik" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }}"
 EOH
 
-        destination = "queue/config.env"
+        destination = "local/config.env"
         env         = true
       }
     }
