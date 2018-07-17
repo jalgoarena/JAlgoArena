@@ -3,30 +3,14 @@ job "jalgoarena-judge" {
 
   update {
     max_parallel = 1
-    min_healthy_time = "10s"
     healthy_deadline = "3m"
-    progress_deadline = "10m"
-    auto_revert = false
-    canary = 0
-  }
-
-  migrate {
-    max_parallel = 1
-    health_check = "checks"
-    min_healthy_time = "10s"
-    healthy_deadline = "5m"
+    auto_revert = true
   }
 
   group "judge-docker-1" {
-    restart {
-      attempts = 2
-      interval = "30m"
-      delay = "15s"
-      mode = "fail"
-    }
 
     ephemeral_disk {
-      size = 1000
+      size = 300
     }
 
     task "jalgoarena-judge-1" {
@@ -58,15 +42,9 @@ EOH
   }
 
   group "judge-docker-2" {
-    restart {
-      attempts = 2
-      interval = "30m"
-      delay = "15s"
-      mode = "fail"
-    }
 
     ephemeral_disk {
-      size = 1000
+      size = 300
     }
 
     task "jalgoarena-judge-2" {
@@ -92,7 +70,7 @@ EOH
 BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
 EOH
 
-        destination = "config.env"
+        destination = "local/config.env"
         env         = true
       }
     }
