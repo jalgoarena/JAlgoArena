@@ -7,27 +7,44 @@ job "jalgoarena-judge" {
     auto_revert = true
   }
 
-  group "judge-docker-1" {
+  group "judge-docker" {
+    count = 2
 
     ephemeral_disk {
       size = 300
     }
 
-    task "jalgoarena-judge-1" {
+    task "jalgoarena-judge" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/judge:2.3.475"
+        image = "jalgoarena/judge:2.4.480"
         network_mode = "host"
       }
 
       resources {
         cpu    = 1000
         memory = 1500
+        network {
+          port "http" {}
+        }
       }
 
       env {
+        PORT = "${NOMAD_PORT_http}"
         JAVA_OPTS = "-Xmx1g -Xms512m"
+      }
+
+      service {
+        name = "jalgoarena-judge"
+        tags = ["traefik.frontend.rule=PathPrefixStrip:/judge/api", "secure=false"]
+        port = "http"
+        check {
+          type          = "http"
+          path          = "/actuator/health"
+          interval      = "10s"
+          timeout       = "1s"
+        }
       }
 
       template {
@@ -36,41 +53,6 @@ BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ en
 EOH
 
         destination = "judge/config.env"
-        env         = true
-      }
-    }
-  }
-
-  group "judge-docker-2" {
-
-    ephemeral_disk {
-      size = 300
-    }
-
-    task "jalgoarena-judge-2" {
-      driver = "docker"
-
-      config {
-        image = "jalgoarena/judge:2.3.475"
-        network_mode = "host"
-      }
-
-      resources {
-        cpu    = 1000
-        memory = 1500
-      }
-
-      env {
-        JAVA_OPTS = "-Xmx1g -Xms512m"
-        PORT = 6001
-      }
-
-      template {
-        data = <<EOH
-BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
-EOH
-
-        destination = "local/config.env"
         env         = true
       }
     }
