@@ -6,7 +6,6 @@ job "jalgoarena-logstash" {
   update {
     max_parallel = 1
     healthy_deadline = "3m"
-    auto_revert = true
   }
 
   group "logstash-docker" {
@@ -21,9 +20,8 @@ job "jalgoarena-logstash" {
       config {
         image = "logstash:5.6.10-alpine"
         network_mode = "host"
-        volumes = ["/home/jacek/jalgoarena-config/logstash:/config-dir"]
         args = [
-          "-f", "/config-dir/logstash.conf"
+          "-f", "local/logstash.conf"
         ]
       }
 
@@ -31,7 +29,10 @@ job "jalgoarena-logstash" {
         cpu    = 500
         memory = 750
         network {
-          port "logstash" {
+          port "tcp" {
+            static = 4560
+          }
+          port "http" {
             static = 9600
           }
         }
@@ -40,12 +41,47 @@ job "jalgoarena-logstash" {
       service {
         name = "logstash"
         tags = ["elk", "traefik.enable=false"]
-        port = "logstash"
+        port = "tcp"
         check {
           type      = "tcp"
           interval  = "10s"
           timeout   = "1s"
         }
+      }
+
+      template {
+        data = <<EOH
+input {
+    tcp {
+        port => 4560
+        codec => json_lines
+    }
+}
+
+filter {
+  date {
+    match => [ "timestamp" , "yyyy-MM-dd HH:mm:ss.SSS" ]
+  }
+
+  mutate {
+    remove_field => ["@version"]
+  }
+}
+
+output {
+  stdout {
+    codec => rubydebug
+  }
+
+  elasticsearch {
+    hosts => [
+      "127.0.0.1"
+    ]
+  }
+}
+EOH
+
+        destination = "local/logstash.conf"
       }
     }
   }
