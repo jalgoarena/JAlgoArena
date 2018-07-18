@@ -18,6 +18,11 @@ job "jalgoarena-ui" {
       config {
         image = "jalgoarena/ui:2.3.8"
         network_mode = "host"
+        network {
+          port "http" {
+            static = 3000
+          }
+        }
       }
 
       resources {
@@ -28,11 +33,9 @@ job "jalgoarena-ui" {
       service {
         name = "jalgoarena-ui"
         tags = ["ui", "traefik.enable=false"]
-        address_mode = "driver"
-        port = 3000
+        port = "http"
         check {
           type      = "tcp"
-          address_mode = "driver"
           interval  = "10s"
           timeout   = "1s"
         }
