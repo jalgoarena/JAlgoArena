@@ -7,6 +7,7 @@ job "jalgoarena-ranking" {
   }
 
   group "ranking-docker" {
+    count = 2
 
     ephemeral_disk {
       migrate = true
@@ -18,18 +19,35 @@ job "jalgoarena-ranking" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/ranking:2.3.49"
+        image = "jalgoarena/ranking:2.4.53"
         network_mode = "host"
-        volumes = ["/home/jacek/jalgoarena-config/RankingStore:/app/RankingStore"]
+        volumes = ["/home/jacek/jalgoarena-config/RankingStore-${NOMAD_ALLOC_INDEX}:/app/RankingStore"]
       }
 
       resources {
         cpu    = 1000
         memory = 750
+        network {
+          port "http" {}
+        }
       }
 
       env {
+        KAFKA_CONSUMER_GROUP_ID = "ranking-${NOMAD_ALLOC_INDEX}"
+        PORT = "${NOMAD_PORT_http}"
         JAVA_OPTS = "-Xmx512m -Xms50m"
+      }
+
+      service {
+        name = "jalgoarena-ranking"
+        tags = ["traefik.frontend.rule=PathPrefixStrip:/ranking/api", "secure=false"]
+        port = "http"
+        check {
+          type          = "http"
+          path          = "/actuator/health"
+          interval      = "10s"
+          timeout       = "1s"
+        }
       }
 
       template {

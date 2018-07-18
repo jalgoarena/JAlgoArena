@@ -19,7 +19,7 @@ job "jalgoarena-submissions" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/submissions:2.4.178"
+        image = "jalgoarena/submissions:2.4.181"
         network_mode = "host"
         volumes = ["/home/jacek/jalgoarena-config/SubmissionsStore-${NOMAD_ALLOC_INDEX}:/app/SubmissionsStore"]
       }
