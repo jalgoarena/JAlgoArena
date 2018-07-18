@@ -75,7 +75,7 @@ output {
 
   elasticsearch {
     hosts => [
-      "127.0.0.1"
+      {{ range $index, $elasticsearch := service "elasticsearch" }}"{{ if eq $index 0 }}{{ $elasticsearch.Address }}:{{ $elasticsearch.Port }}"{{ else}},"{{ $elasticsearch.Address }}:{{ $elasticsearch.Port }}"{{ end }}{{ end }}
     ]
   }
 }

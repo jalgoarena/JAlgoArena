@@ -24,14 +24,16 @@ job "jalgoarena-elasticsearch" {
         cpu    = 1000
         memory = 3000
         network {
-          port "elasticsearch" {}
+          port "http" {
+            static = 9200
+          }
         }
       }
 
       service {
         name = "elasticsearch"
         tags = ["elk", "traefik.enable=false"]
-        port = "elasticsearch"
+        port = "http"
         check {
           type      = "tcp"
           interval  = "10s"
