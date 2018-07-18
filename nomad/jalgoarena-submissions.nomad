@@ -4,7 +4,6 @@ job "jalgoarena-submissions" {
   update {
     max_parallel = 1
     healthy_deadline = "3m"
-    auto_revert = true
   }
 
   group "submissions-docker" {
@@ -53,8 +52,8 @@ job "jalgoarena-submissions" {
 
       template {
         data = <<EOH
-BOOTSTRAP_SERVERS = "{{ range $index, $element := service "kafka1" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }},{{ range $index, $element := service "kafka2" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }},{{ range $index, $element := service "kafka3" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }}"
-JALGOARENA_API_URL = "http://{{ range $index, $element := service "traefik" }}{{ if eq $index 0 }}{{ .Address }}:{{ .Port }}{{ end }}{{ end }}"
+BOOTSTRAP_SERVERS = "{{ range $index, $kafka := service "kafka" }}{{ if eq $index 0 }}{{ $kafka.Address }}:{{ $kafka.Port }}{{ else}},{{ $kafka.Address }}:{{ $kafka.Port }}{{ end }}{{ end }}"
+JALGOARENA_API_URL = "http://{{ range $index, $traefik := service "traefik" }}{{ if eq $index 0 }}{{ $traefik.Address }}:{{ $traefik.Port }}{{ end }}{{ end }}"
 EOH
 
         destination = "local/config.env"

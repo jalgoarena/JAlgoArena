@@ -4,7 +4,6 @@ job "jalgoarena-auth" {
   update {
     max_parallel = 1
     healthy_deadline = "3m"
-    auto_revert = true
   }
 
   group "auth-docker" {

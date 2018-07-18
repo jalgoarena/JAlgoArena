@@ -4,11 +4,10 @@ job "jalgoarena-events" {
   update {
     max_parallel = 1
     healthy_deadline = "3m"
-    auto_revert = true
   }
 
   group "events-docker" {
-    count = 2
+    count = 1
 
     ephemeral_disk {
       size = 300
@@ -26,20 +25,22 @@ job "jalgoarena-events" {
         cpu    = 500
         memory = 512
         network {
-          port "http" {}
+          port "events" {
+            static = 5005
+          }
         }
       }
 
       env {
         KAFKA_CONSUMER_GROUP_ID = "events-${NOMAD_ALLOC_INDEX}"
-        PORT = "${NOMAD_PORT_http}"
+        PORT = "${NOMAD_PORT_events}"
         JAVA_OPTS = "-Xmx400m -Xms50m"
       }
 
       service {
         name = "jalgoarena-events"
         tags = ["secure=false"]
-        port = "http"
+        port = "events"
         check {
           type          = "http"
           path          = "/actuator/health"
@@ -50,7 +51,7 @@ job "jalgoarena-events" {
 
       template {
         data = <<EOH
-BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
+BOOTSTRAP_SERVERS = "{{ range $index, $kafka := service "kafka" }}{{ if eq $index 0 }}{{ $kafka.Address }}:{{ $kafka.Port }}{{ else}},{{ $kafka.Address }}:{{ $kafka.Port }}{{ end }}{{ end }}"
 EOH
 
         destination = "local/config.env"

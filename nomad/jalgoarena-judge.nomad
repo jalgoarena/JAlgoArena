@@ -4,7 +4,6 @@ job "jalgoarena-judge" {
   update {
     max_parallel = 1
     healthy_deadline = "3m"
-    auto_revert = true
   }
 
   group "judge-docker" {
@@ -49,7 +48,7 @@ job "jalgoarena-judge" {
 
       template {
         data = <<EOH
-BOOTSTRAP_SERVERS = "{{ range service "kafka1" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka2" }}{{ .Address }}:{{ .Port }}{{ end }},{{ range service "kafka3" }}{{ .Address }}:{{ .Port }}{{ end }}"
+BOOTSTRAP_SERVERS = "{{ range $index, $kafka := service "kafka" }}{{ if eq $index 0 }}{{ $kafka.Address }}:{{ $kafka.Port }}{{ else}},{{ $kafka.Address }}:{{ $kafka.Port }}{{ end }}{{ end }}"
 EOH
 
         destination = "judge/config.env"

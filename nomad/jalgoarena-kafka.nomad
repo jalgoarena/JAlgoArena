@@ -1,10 +1,10 @@
 job "jalgoarena-kafka" {
-  datacenters = ["dc1"]
+  datacenters = [
+    "dc1"]
 
   update {
     max_parallel = 1
     healthy_deadline = "3m"
-    auto_revert = true
   }
 
   group "zk-docker" {
@@ -22,36 +22,40 @@ job "jalgoarena-kafka" {
       }
 
       resources {
-        cpu    = 500
+        cpu = 500
         memory = 500
+        network {
+          port "zk" {}
+        }
       }
 
       env {
-        ZOOKEEPER_CLIENT_PORT = 2181
+        ZOOKEEPER_CLIENT_PORT = "${NOMAD_PORT_zk}"
       }
 
       service {
         name = "zookeeper"
-        tags = ["zookeeper", "traefik.enable=false"]
-        port = 2181
-        address_mode = "driver"
+        tags = [
+          "zookeeper",
+          "traefik.enable=false"]
+        port = "zk"
         check {
-          type      = "tcp"
-          address_mode = "driver"
-          interval  = "10s"
-          timeout   = "1s"
+          type = "tcp"
+          interval = "10s"
+          timeout = "1s"
         }
       }
     }
   }
 
-  group "kafka-docker-1" {
+  group "kafka-docker" {
+    count = 3
 
     ephemeral_disk {
       size = 1000
     }
 
-    task "kafka-1" {
+    task "kafka" {
       driver = "docker"
 
       config {
@@ -60,107 +64,38 @@ job "jalgoarena-kafka" {
       }
 
       resources {
-        cpu    = 750
+        cpu = 750
         memory = 1000
+        network {
+          port "kafka" {}
+        }
       }
 
       env {
-        KAFKA_BROKER_ID = 0
-        KAFKA_ADVERTISED_LISTENERS = "PLAINTEXT://localhost:9092"
-        KAFKA_ZOOKEEPER_CONNECT = "localhost:2181"
+        KAFKA_BROKER_ID = "${NOMAD_ALLOC_INDEX}"
+        KAFKA_ADVERTISED_LISTENERS = "PLAINTEXT://${NOMAD_IP_kafka}:${NOMAD_PORT_kafka}"
       }
 
       service {
-        name = "kafka1"
-        tags = ["kafka", "traefik.enable=false"]
-        port = 9092
-        address_mode = "driver"
+        name = "kafka"
+        tags = [
+          "kafka",
+          "traefik.enable=false"]
+        port = "kafka"
         check {
-          type      = "tcp"
-          address_mode = "driver"
-          interval  = "10s"
-          timeout   = "1s"
+          type = "tcp"
+          interval = "10s"
+          timeout = "1s"
         }
       }
-    }
-  }
 
-  group "kafka-docker-2" {
+      template {
+        data = <<EOH
+KAFKA_ZOOKEEPER_CONNECT = "{{ range $index, $zk := service "zookeeper" }}{{ if eq $index 0 }}{{ $zk.Address }}:{{ $zk.Port }}{{ end }}{{ end }}"
+EOH
 
-    ephemeral_disk {
-      size = 1000
-    }
-
-    task "kafka-2" {
-      driver = "docker"
-
-      config {
-        image = "confluentinc/cp-kafka"
-        network_mode = "host"
-      }
-
-      resources {
-        cpu    = 750
-        memory = 1000
-      }
-
-      env {
-        KAFKA_BROKER_ID = 1
-        KAFKA_ADVERTISED_LISTENERS = "PLAINTEXT://localhost:9093"
-        KAFKA_ZOOKEEPER_CONNECT = "localhost:2181"
-      }
-
-      service {
-        name = "kafka2"
-        tags = ["kafka", "traefik.enable=false"]
-        port = 9093
-        address_mode = "driver"
-        check {
-          type      = "tcp"
-          address_mode = "driver"
-          interval  = "10s"
-          timeout   = "1s"
-        }
-      }
-    }
-  }
-
-  group "kafka-docker-3" {
-
-    ephemeral_disk {
-      size = 1000
-    }
-
-    task "kafka-3" {
-      driver = "docker"
-
-      config {
-        image = "confluentinc/cp-kafka"
-        network_mode = "host"
-      }
-
-      resources {
-        cpu    = 750
-        memory = 1000
-      }
-
-      env {
-        KAFKA_BROKER_ID = 2
-        KAFKA_ADVERTISED_LISTENERS = "PLAINTEXT://localhost:9094"
-        KAFKA_ZOOKEEPER_CONNECT = "localhost:2181"
-      }
-
-      service {
-        name = "kafka3"
-        tags = ["kafka", "traefik.enable=false"]
-        port = 9094
-        address_mode = "driver"
-        check {
-          type      = "tcp"
-          address_mode = "driver"
-          interval  = "10s"
-          timeout   = "1s"
-        }
+        destination = "local/config.env"
+        env = true
       }
     }
   }
