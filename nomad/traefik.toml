@@ -1,9 +1,4 @@
-logLevel = "INFO"
 defaultEntryPoints = ["http"]
-
-[accessLog]
-
-[traefikLog]
 
 [entryPoints]
   [entryPoints.http]
