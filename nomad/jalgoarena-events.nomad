@@ -7,7 +7,7 @@ job "jalgoarena-events" {
   }
 
   group "events-docker" {
-    count = 1
+    count = 2
 
     ephemeral_disk {
       size = 300
@@ -25,9 +25,7 @@ job "jalgoarena-events" {
         cpu    = 500
         memory = 512
         network {
-          port "events" {
-            static = 5005
-          }
+          port "events" {}
         }
       }
 
@@ -39,7 +37,7 @@ job "jalgoarena-events" {
 
       service {
         name = "jalgoarena-events"
-        tags = ["secure=false"]
+        tags = ["traefik.frontend.entryPoints=ws", "traefik.frontend.rule=PathPrefix:/", "secure=false"]
         port = "events"
         check {
           type          = "http"

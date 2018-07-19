@@ -1,8 +1,16 @@
+logLevel = "INFO"
 defaultEntryPoints = ["http"]
+
+[accessLog]
+
+[traefikLog]
 
 [entryPoints]
   [entryPoints.http]
   address = ":5001"
+
+  [entryPoints.ws]
+  address = ":5005"
 
   [entryPoints.dashboard]
   address = ":15001"

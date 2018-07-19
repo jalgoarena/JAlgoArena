@@ -16,7 +16,7 @@ job "jalgoarena-ui" {
       driver = "docker"
 
       config {
-        image = "jalgoarena/ui:2.4.0"
+        image = "jalgoarena/ui:2.4.1"
         network_mode = "host"
       }
 
@@ -43,8 +43,8 @@ job "jalgoarena-ui" {
 
       template {
         data = <<EOH
-JALGOARENA_API_URL = "http://{{ range $index, $traefik := service "traefik" }}{{ if eq $index 0 }}{{ $traefik.Address }}:{{ $traefik.Port }}{{ end }}{{ end }}"
-JALGOARENA_WS_URL = "http://{{ range $index, $events := service "jalgoarena-events" }}{{ if eq $index 0 }}{{ $events.Address }}:{{ $events.Port }}{{ end }}{{ end }}"
+JALGOARENA_API_HTTP_URL = "http://{{ range $index, $traefik := service "traefik" }}{{ if eq $index 0 }}{{ $traefik.Address }}:5001{{ end }}{{ end }}"
+JALGOARENA_API_WS_URL = "http://{{ range $index, $traefik := service "traefik" }}{{ if eq $index 0 }}{{ $traefik.Address }}:5005{{ end }}{{ end }}"
 EOH
 
         destination = "local/config.env"

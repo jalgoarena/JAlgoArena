@@ -1,6 +1,8 @@
 job "jalgoarena-traefik" {
   datacenters = ["dc1"]
 
+  type = "system"
+
   update {
     max_parallel = 1
     healthy_deadline = "3m"
@@ -28,6 +30,9 @@ job "jalgoarena-traefik" {
           port "http" {
             static = 5001
           }
+          port "ws" {
+            static = 5005
+          }
           port "dashboard" {
             static = 15001
           }
@@ -39,7 +44,16 @@ job "jalgoarena-traefik" {
         tags = ["traefik", "traefik.enable=false"]
         port = "http"
         check {
+          name      = "service: traefik http check"
           type      = "tcp"
+          port      = "http"
+          interval  = "10s"
+          timeout   = "1s"
+        }
+        check {
+          name      = "service: traefik ws check"
+          type      = "tcp"
+          port      = "ws"
           interval  = "10s"
           timeout   = "1s"
         }
