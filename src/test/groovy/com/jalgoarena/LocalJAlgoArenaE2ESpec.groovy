@@ -22,7 +22,7 @@ class LocalJAlgoArenaE2ESpec extends Specification {
     }
 
     @Unroll
-    @Ignore
+//    @Ignore
     "User #username submits successfully #problemId problem solution"(String problemId, String sourceFileName, String username, String team) {
         given: "User creates account if empty and log in"
             def user = createOrFindUser(username, team)
