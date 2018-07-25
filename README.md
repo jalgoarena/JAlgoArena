@@ -18,14 +18,4 @@ JAlgoArena allows user to see existing problems, create account and using it sub
 
 See more details on [JAlgoArena Docs](https://jalgoarena.github.io/docs/) page.
 
-## Continuous Delivery
-
-- initially, developer push his changes to GitHub
-- in next stage, GitHub notifies Travis CI about changes
-- Travis CI runs whole continuous integration flow, running compilation, tests and generating reports
-- coverage report is sent to Codecov
-- zip package is saved to GitHub releases per every component repository
-
-![Continuous Delivery](https://github.com/spolnik/JAlgoArena/raw/master/design/continuous_delivery.png)
-
 ![Component Diagram](https://github.com/spolnik/JAlgoArena/raw/master/design/JAlgoArena_Logo.png)
