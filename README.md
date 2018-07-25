@@ -50,11 +50,10 @@ As calculating points within JAlgoArena is not a trivial thing, it requires deta
   > E.g. if time limit is 1 second, and you run your code in less than 1 millisecond 1 / 1 < 1 -> 10.0 points
   
 * In addition, problem solution with best time from all submissions (independently from language) gets 1 bonus point
-* For any language you solve, with every additional submission you get penalty:
-  * e.g. if you submitted 2 times problem solution in java, you will get minus 1 point of your result
+* Every additional submission you get penalty:
+  * e.g. if you submitted 2 times problem solution, 1 point will be taken from your final result
   * penalty is calculated till minimal amount of points for passed submission which is 1 point
-* Language rankings consider only particular programming language submissions/points
-* To general ranking, only best of your different programming languages submissions per problem is considered within your score
+* Only best of your submissions per problem is considered within your score
 
 > Note: you can always verify points of your submission within problem ranking, which can be accessed on problem page
 
