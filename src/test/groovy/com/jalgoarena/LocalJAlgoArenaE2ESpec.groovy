@@ -6,7 +6,6 @@ import groovy.json.StringEscapeUtils
 import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
-import spock.lang.Ignore
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -22,7 +21,6 @@ class LocalJAlgoArenaE2ESpec extends Specification {
     }
 
     @Unroll
-    @Ignore
     "User #username submits successfully #problemId problem solution"(String problemId, String sourceFileName, String username, String team) {
         given: "User creates account if empty and log in"
             def user = createOrFindUser(username, team)
