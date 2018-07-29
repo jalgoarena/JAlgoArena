@@ -17,7 +17,7 @@ test {
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.7'
 
-    testCompile 'com.google.guava:guava:18.0',
+    testCompile 'com.google.guava:guava:25.1-jre',
                 'org.slf4j:slf4j-api:1.7.21',
                 'org.spockframework:spock-core:1.0-groovy-2.4',
                 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1',
