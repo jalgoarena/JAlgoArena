@@ -50,7 +50,7 @@ class LocalJAlgoArenaE2ESpec extends Specification {
                     ).data
                 }
 
-                if (submissionResult != null && submissionResult.statusCode != "NOT_FOUND") {
+                if (submissionResult != null && submissionResult.statusCode != "NOT_FOUND" && submissionResult.statusCode != "WAITING") {
                     break
                 }
                 log.info("No response, retrying [iteration=$iteration]")
