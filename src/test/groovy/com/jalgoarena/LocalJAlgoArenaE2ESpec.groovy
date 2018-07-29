@@ -229,6 +229,8 @@ class LocalJAlgoArenaE2ESpec extends Specification {
         def signupRequestJson = """{
   "username": "${username}",
   "password": "blabla",
+  "firstname": "${username}",
+  "surname": "Spolnik",
   "email": "${username}@email.com",
   "region": "Kraków",
   "team": "$team",
