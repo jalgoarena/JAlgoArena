@@ -38,10 +38,10 @@ class LocalJAlgoArenaE2ESpec extends Specification {
 
         when: "We check user submissions"
             log.info("Step 4 - Check Submission for $problemId")
-            sleep(1000)
+            sleep(10)
 
             def submissionResult
-            for (iteration in 1..20) {
+            for (iteration in 1..40) {
                 handleHttpException {
                     submissionResult = traefikEdgeService.get(
                             path: "/submissions/api/submissions/find/${user.id}/${judgeResult.submissionId}",
@@ -54,7 +54,7 @@ class LocalJAlgoArenaE2ESpec extends Specification {
                     break
                 }
                 log.info("No response, retrying [iteration=$iteration]")
-                sleep(2000)
+                sleep(200)
             }
 
 
